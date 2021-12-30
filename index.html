@@ -1,8 +1,9 @@
 <html>
 	<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Survey Website</title>
-		<script src="https://cdn.jsdelivr.net/npm/vue@3.0" defer></script>
-		<script src="./script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="style.css"></link>
 	</head>
 	<body>
@@ -12,17 +13,15 @@
 		<br>
 		<div class='enteraccount'>
 			<div id='login'><input type='button' class='btn'><h1>Log-In</h1></input></div>
-		<div id='signin'><input type='button' class='btn'><h1>Sign-In</h1></input></div>
+			<div id='signin'><input type='button' class='btn'><h1>Sign-In</h1></input></div>
 		</div>
+		<div id='app'>
 		<div class='features'>
 			<ul>Come here to create personalized surveys for free!
-			<li>You can create as many surveys as you want</li>
-			<li>There can be unlimited questions</li>
-			<li>As well as unlimited answers</li>
-			<li>And as many people can answer as you want</li>
-			<li>Only want certain people to answer?</li>
-			<li>Make it a Private Survey and give the Private Key to just them!</li>
-				</ul>
-			</div>
+				<li v-for="feature in features">{{feature}}</li>
+			</ul>
+		</div>
+		</div>
+				<script src="./script.js"></script>
 	</body>
 </html>
