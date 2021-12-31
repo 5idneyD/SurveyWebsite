@@ -1,27 +1,28 @@
 <html>
 	<head>
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Survey Website</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css"></link>
 	</head>
 	<body>
-		<div id='welcome-box'>
-			<h1 id='header'>Welcome to Survey Heaven</h1>
+		<div id='welcomebox'>
+			<div>
+				<h1 id='header'>Welcome to Survey Heaven</h1>
+			</div>
+			<div class='enteraccount'>
+				<div id='login'><h3><button>Log-In</button></h3></div>
+				<div id='signin'><h3><button>Sign-In</button></h3></div>
+			</div>
 		</div>
-		<br>
-		<div class='enteraccount'>
-			<div id='login'><input type='button' class='btn'><h1>Log-In</h1></input></div>
-			<div id='signin'><input type='button' class='btn'><h1>Sign-In</h1></input></div>
-		</div>
-		<div id='app'>
+	</div>
+	<div id='app'>
 		<div class='features'>
-			<ul>Come here to create personalized surveys for free!
-				<li v-for="feature in features">{{feature}}</li>
+			<ul>
+				<ol v-for="feature in features">{{feature}}</ol>
 			</ul>
 		</div>
-		</div>
-				<script src="./script.js"></script>
-	</body>
+	</div>
+	<script src="./script.js"></script>
+</body>
 </html>
