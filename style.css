@@ -56,5 +56,10 @@ ol {
 	float: left;
 	margin: 30% 10% 10% -10%;
 	opacity: 0;
-
+	-ms-animation-fill-mode: forwards;
+	-webkit-animation-fill-mode: forwards;
 }
+@keyframes fadeIn {
+	to {opacity: 1;}
+}
+

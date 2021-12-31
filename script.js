@@ -1,12 +1,12 @@
 $(document).ready(function(){
 	ranks.forEach(function(e){
-		setInterval(here, 1000, e);
+		setInterval(here, 500, e);
 		console.log(ranks);
 		});
 });
 
 let ranks = ['#one', '#two', '#three', '#four', '#five', '#six', '#seven']
-
+var animation = "fadeIn 3s forwards"
 function here(element){
 	const box = document.querySelector(element);
 	const rect = box.getBoundingClientRect();
@@ -19,8 +19,6 @@ function here(element){
 
 	if (isInViewport == true){
 	$(element).css(
-	{"opacity": "1"});
-	var ind = ranks.indexOf(element);
-	ranks = ranks.splice(ind, 1);
+	{"animation": animation});
 }
 };
