@@ -1,14 +1,26 @@
-const app = new Vue({
-	el: "#app",
-	data: {
-		newfeature: "",
-		features: [
-		"Come here to create personalized surveys for free!",
-		"You can create as many surveys as you want",
-			"There can be unlimited questions",
-			"As well as unlimited answers",
-			"And as many people can answer as you want",
-			"Only want certain people to answer?",
-		"Make it a Private Survey and give the Key to just them!"],
-	}
+$(document).ready(function(){
+	ranks.forEach(function(e){
+		setInterval(here, 1000, e);
+		console.log(ranks);
+		});
 });
+
+let ranks = ['#one', '#two', '#three', '#four', '#five', '#six', '#seven']
+
+function here(element){
+	const box = document.querySelector(element);
+	const rect = box.getBoundingClientRect();
+	
+	const isInViewport = rect.top >= 0 &&
+	rect.left >= 0 &&
+	rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+	rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+	
+
+	if (isInViewport == true){
+	$(element).css(
+	{"opacity": "1"});
+	var ind = ranks.indexOf(element);
+	ranks = ranks.splice(ind, 1);
+}
+};
