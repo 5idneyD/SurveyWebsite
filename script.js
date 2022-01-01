@@ -6,7 +6,7 @@ $(document).ready(function(){
 });
 
 let ranks = ['#one', '#two', '#three', '#four', '#five', '#six', '#seven']
-var animation = "fadeIn 3s forwards"
+var animation = "fadeIn 1s forwards"
 function here(element){
 	const box = document.querySelector(element);
 	const rect = box.getBoundingClientRect();
