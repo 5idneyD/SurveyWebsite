@@ -24,6 +24,23 @@ body {
 	font-size: 22;
 }
 table {
-	margin-top: 50%;
+	margin-top: 70%;
 	margin-left: 20%;
+}
+#createsurvey {
+	position: absolute;
+	margin-top: 40%;
+	margin-left: -50%;
+	height: 10%;
+	width: 30%;
+
+}
+button{
+	width: 110%;
+	height: 40%;
+	background: rgba(100, 100, 200, 0.9);
+}
+a:visited, a:link {
+	font-size: 20;
+	color: white;
 }
