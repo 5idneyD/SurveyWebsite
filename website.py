@@ -15,10 +15,11 @@ app.config['SECRET_KEY'] = os.urandom(12).hex()
 
 db = SQLAlchemy(app)
 class Users(db.Model):
-    id = db.Column(db.Integer)
-    username = db.Column(db.String(100), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100))
     password = db.Column(db.String(100))
     encrypted_username = db.Column(db.String(255))
+    surveys = db.relationship("Surveys", backref="username")
 
     
     def __init__ (self, username, password, encrypted_username):
@@ -28,9 +29,10 @@ class Users(db.Model):
 
 
 class Surveys(db.Model):
-    username = db.Column(db.String(100), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), db.ForeignKey("Users.username"))
     survey_name = db.Column(db.String(255))
-    # users = db.relationship("Users", backref='surveys')
+    
     
 db.create_all()
 @app.route("/")
@@ -87,23 +89,26 @@ def login():
             
     return render_template("login.html")
 
+
 @app.route("/user/<encrypted_username>", methods=['POST', 'GET'])
 def user_page(encrypted_username):
+    
     user = db.session.execute("SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
     for i in user:
         items=dict(i)
     
     encrypted_name = items['encrypted_username']
-    create_survey_link = "/create_survey/" + encrypted_name
+    create_survey_link = "/user/" + encrypted_name + "/create_survey/"
 
 
     return render_template("userhome.html", user=user, items=items, create_survey_link=create_survey_link)
 
 
-@app.route("/create_survey/<encrypted_username>", methods=['POST', 'GET'])
+
+@app.route("/user/<encrypted_username>/create_survey/", methods=['POST', 'GET'])
 def create_survey(encrypted_username):
-    encrypted_username = "Sidney"
-    return render_template("create_survey.html", encrypted_username=encrypted_username)
+    print(encrypted_username)
+    return render_template("create_survey.html")
 
 
 if __name__=="__main__":
