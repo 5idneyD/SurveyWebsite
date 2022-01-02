@@ -74,7 +74,7 @@ def login():
                 else:
                     print("Logged in")
                     encrypted_username = i[3]
-                    return redirect(f"userpage/{encrypted_username}")
+                    return redirect(f"user/{encrypted_username}")
                     
                     
         if current_id == False:
@@ -82,7 +82,7 @@ def login():
             
     return render_template("login.html")
 
-@app.route("/userpage/<encrypted_username>", methods=['POST', 'GET'])
+@app.route("/user/<encrypted_username>", methods=['POST', 'GET'])
 def user_page(encrypted_username):
     table_name="users"
     user = db.session.execute("SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")

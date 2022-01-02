@@ -31,8 +31,12 @@ body {
 #password2 {
 	margin-left: 4%;
 }
-#submitbutton {
+#submitbutton, #login {
 	width: 40%;
 	margin-left: 10%;
 	margin-top: 8%;
+}
+button {
+	width: 100%;
+	
 }
