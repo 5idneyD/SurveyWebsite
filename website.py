@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 import os
@@ -11,6 +11,7 @@ app = Flask(__name__,
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(basedir, "users.sqlite3")
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
+app.config['SECRET_KEY'] = os.urandom(12).hex()
 
 db = SQLAlchemy(app)
 class Users(db.Model):
@@ -66,6 +67,10 @@ def login():
                 current_id = i[0]
                 if i[2] != current_password:
                     print("Password does not match")
+                    data = {
+                        "message": "Password does not match"
+                        }
+                    return render_template("login.html", messages={'main': "Password does not match"})
                 else:
                     print("Logged in")
                     encrypted_username = i[3]
@@ -80,10 +85,12 @@ def login():
 @app.route("/userpage/<encrypted_username>", methods=['POST', 'GET'])
 def user_page(encrypted_username):
     table_name="users"
-    user = db.session.execute("SELECT * FROM users WHERE username='" + encrypted_username + "';")
+    user = db.session.execute("SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
     for i in user:
-        print(i)
-    return render_template("userhome.html", user=user)
+        items=dict(i)
+
+        
+    return render_template("userhome.html", user=user, items=items)
 
 if __name__=="__main__":
     app.run()

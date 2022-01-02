@@ -16,5 +16,10 @@
 			<p>Enter Password<input name="password" id='password' type='text'></p>
 			<input type='submit' id='submitbutton' value="Log-In">
 			</form></div>
+			<div style='width: 100%;'>
+			{%for i in data%}
+			<p>{{i[0]}}</p>
+			{%endfor%}
+			</div>
 	</body>
 </html>	
