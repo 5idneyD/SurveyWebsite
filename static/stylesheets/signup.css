@@ -1,0 +1,38 @@
+
+body {
+	display: flex;
+	justify-content: center;
+}
+#welcomebox {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	position: absolute;
+	width: 103%;
+	height: 150px;
+	margin-top: -3%;
+	margin-left: -0%;
+	border-bottom: 2px solid white;
+	color: white;
+	background-color: rgba(100, 100, 200, 0.9)
+}
+
+#createaccount{
+	position: absolute;
+	margin-top: 50%;
+	border: 2px solid rgba(100, 100, 200, 0.9);
+	width: 90%;
+	padding: 2%;
+}
+#username, #password, #password2{
+	margin-left: 10%;
+	margin-top: 3%;
+}
+#password2 {
+	margin-left: 4%;
+}
+#submitbutton {
+	width: 40%;
+	margin-left: 10%;
+	margin-top: 8%;
+}

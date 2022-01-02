@@ -29,7 +29,7 @@ html{
 	color: white;
 	
 }
-#login, #signin {
+#login, #signup {
 	margin-left: 5%;
 	margin-right: 5%;
 }
@@ -103,7 +103,6 @@ ol {
 	width: 50%;
 	height: 3%;
 	background: black;
-	/*margin: 30% 0% -10% 40%;*/
 	margin-left: 40%;
 	margin-top: -80%;
 }
@@ -117,7 +116,7 @@ ol {
 		
 	border: 5px solid grey;
 	z-index: 51;
-		position: absolute;
+	position: absolute;
 	width:6%;
 	height: 2%;
 }
