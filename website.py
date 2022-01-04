@@ -10,7 +10,7 @@ app = Flask(__name__,
             template_folder='./templates')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(basedir, "users.sqlite3")
-app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.urandom(12).hex()
 
 db = SQLAlchemy(app)
@@ -19,16 +19,12 @@ class Users(db.Model):
     username = db.Column(db.String(100))
     password = db.Column(db.String(100))
     encrypted_username = db.Column(db.String(255))
-    # surveys = db.relationship("Surveys", backref="username")
 
 class Surveys(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    # username = db.Column(db.String(100), db.ForeignKey("Users.username"))
+    username = db.Column(db.String(100))
     survey_name = db.Column(db.String(255))
     
-
-class Questions(db.Model):
-    pass
 
 db.create_all()
 @app.route("/")
@@ -103,7 +99,21 @@ def user_page(encrypted_username):
 
 @app.route("/user/<encrypted_username>/create_survey/", methods=['POST', 'GET'])
 def create_survey(encrypted_username):
-    print(encrypted_username)
+
+    if request.method=="POST":
+    
+        current_survey_name = request.form["surveyname"]
+        user = db.session.execute("SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
+        for i in user:
+            items=dict(i)
+        survey_creator_username = items['username']
+        
+        
+        new_survey = Surveys(username=survey_creator_username,  survey_name=current_survey_name)
+        db.session.add(new_survey)
+        db.session.commit()
+        
+        
     return render_template("create_survey.html")
 
 
