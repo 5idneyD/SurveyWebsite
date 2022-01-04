@@ -19,21 +19,17 @@ class Users(db.Model):
     username = db.Column(db.String(100))
     password = db.Column(db.String(100))
     encrypted_username = db.Column(db.String(255))
-    surveys = db.relationship("Surveys", backref="username")
-
-    
-    def __init__ (self, username, password, encrypted_username):
-        self.username = username
-        self.password = password
-        self.encrypted_username = encrypted_username
-
+    # surveys = db.relationship("Surveys", backref="username")
 
 class Surveys(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), db.ForeignKey("Users.username"))
+    # username = db.Column(db.String(100), db.ForeignKey("Users.username"))
     survey_name = db.Column(db.String(255))
     
-    
+
+class Questions(db.Model):
+    pass
+
 db.create_all()
 @app.route("/")
 def index(methods=['POST', 'GET']):
