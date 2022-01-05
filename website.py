@@ -24,6 +24,11 @@ class Surveys(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100))
     survey_name = db.Column(db.String(255))
+
+class Questions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    survey_name = db.Column(db.String(255))
+    question = db.Column(db.String(255))
     
 
 db.create_all()
