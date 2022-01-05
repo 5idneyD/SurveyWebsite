@@ -112,11 +112,15 @@ def create_survey(encrypted_username):
     if request.method=="POST":
 
         current_survey_name = request.form["surveyname"]
-        data = request.form
-        print(data)
-        questions = request.form.getlist("new_q")
+        data = dict(request.form)
+        questions = []
+        for key, value in data.items():
+            if key == "surveyname":
+                pass
+            else:
+                questions.append(value)
         print(questions)
-
+        
         user = db.session.execute("SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
         for i in user:
             items=dict(i)
