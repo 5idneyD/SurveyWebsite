@@ -27,6 +27,7 @@ class Surveys(db.Model):
 
 class Questions(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    username = db.Column(db.String(100))
     survey_name = db.Column(db.String(255))
     question = db.Column(db.String(255))
     
@@ -114,6 +115,7 @@ def create_survey(encrypted_username):
         current_survey_name = request.form["surveyname"]
         data = dict(request.form)
         questions = []
+        
         for key, value in data.items():
             if key == "surveyname":
                 pass
@@ -128,11 +130,36 @@ def create_survey(encrypted_username):
         
         new_survey = Surveys(username=survey_creator_username,  survey_name=current_survey_name)
         db.session.add(new_survey)
+        
+        for question in questions:
+            new_question = Questions(username=survey_creator_username,  survey_name=current_survey_name, question=question)
+            db.session.add(new_question)
+        
         db.session.commit()
+        
+        return redirect(f"/user/{encrypted_username}/create_survey/{current_survey_name}/add_answers/")
         
         
     return render_template("create_survey.html")
 
+
+@app.route("/user/<encrypted_username>/create_survey/<current_survey_name>/add_answers/", methods=["POST", "GET"])
+def add_answer(encrypted_username, current_survey_name):
+    
+    questions = db.session.execute("SELECT question FROM questions WHERE survey_name='" + current_survey_name + "';")
+
+    
+    if request.method=="POST":
+        print("hello")
+        data = dict(request.form)
+
+        for key, value in data.items():
+            print(key, value)
+            
+        
+
+    
+    return render_template("add_answers.html", questions=questions)
 
 if __name__=="__main__":
     app.run(debug=True)

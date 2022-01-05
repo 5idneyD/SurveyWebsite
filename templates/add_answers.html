@@ -1,2 +1,36 @@
+<!DOCTYPE html>
 <html>
-	</html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			Survey Website
+		</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/add_answers.css') }}">
+	</head>
+	<body>		
+		<div id='welcomebox'>			
+			<h1 id='header'>
+				Welcome to Survey Heaven
+			</h1>
+		</div>
+		<div id='building'>
+			{%for i in questions%}
+			<div>
+				<h2>{{i[0]}}</h2>
+				<button class={{i[0]}}>Add Answer</button>
+				<form name='answersform' id='answersid'>
+					<ul id={{i[0]}} class='question_head'>
+					</ul>
+					
+				</form>
+			</div>
+			{%endfor%}
+			<form method='post'>
+				<input type='submit' method='post' name='submitbutton' value="Confirm Answers">
+			</form>
+		</div>
+		
+		<script src='/static/js/add_answers.js'></script>
+	</body>
+</html>
