@@ -30,7 +30,11 @@ class Questions(db.Model):
     survey_name = db.Column(db.String(255))
     question = db.Column(db.String(255))
     
-
+class Answers(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.String(255))
+    score = db.Column(db.Integer)
+            
 db.create_all()
 @app.route("/")
 def index(methods=['POST', 'GET']):
