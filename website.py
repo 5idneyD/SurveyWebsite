@@ -15,23 +15,23 @@ app.config['SECRET_KEY'] = os.urandom(12).hex()
 
 db = SQLAlchemy(app)
 class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     username = db.Column(db.String(100))
     password = db.Column(db.String(100))
     encrypted_username = db.Column(db.String(255))
 
 class Surveys(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     username = db.Column(db.String(100))
     survey_name = db.Column(db.String(255))
 
 class Questions(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     survey_name = db.Column(db.String(255))
     question = db.Column(db.String(255))
     
 class Answers(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     answer = db.Column(db.String(255))
     score = db.Column(db.Integer)
             
@@ -110,13 +110,17 @@ def user_page(encrypted_username):
 def create_survey(encrypted_username):
 
     if request.method=="POST":
-    
+
         current_survey_name = request.form["surveyname"]
+        data = request.form
+        print(data)
+        questions = request.form.getlist("new_q")
+        print(questions)
+
         user = db.session.execute("SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
         for i in user:
             items=dict(i)
         survey_creator_username = items['username']
-        
         
         new_survey = Surveys(username=survey_creator_username,  survey_name=current_survey_name)
         db.session.add(new_survey)
@@ -127,4 +131,4 @@ def create_survey(encrypted_username):
 
 
 if __name__=="__main__":
-    app.run()
+    app.run(debug=True)

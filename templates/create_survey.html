@@ -1,4 +1,4 @@
-<!DOCTYPE html5>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,15 +14,25 @@
 				Welcome to Survey Heaven
 			</h1>
 		</div>
+		<button id='addquestion'>Add Question</button>
 		<form id='createsurvey' method='post'>
-		<div id='surveynamer'><h3>Name this Survey: </h3><input type='text' id='surveyname' name='surveyname' value='Survey Name'></div>
-		<div id='builder'>
-			<button id='addquestion'>Add Question</button>
-			<ul id='questions'>
-				</ul>
-				<button id='submit' type='submit'>Continue</button>
+			<div id='surveynamer'><h3 id='subheader'>Name this Survey: </h3>
+				<input type='text' id='surveyname' name='surveyname' value='Survey Name'>
 			</div>
-		</form>
+
+		
+			<div id='builder'>
+				<ul id='questions'>
+				</ul>			
+			</form>
+			<div id='buttons'>
+				
+				
+				<button id='submit' type='submit'>Continue</button>
+				
+				<h6>You will add answers on the next page</h6>
+			</div>
+		</div>
 		<script src='/static/js/create_survey.js'></script>
 	</body>
 </html>

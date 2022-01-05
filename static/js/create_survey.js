@@ -1,7 +1,7 @@
 var question_number = 1;
 $(document).ready(function(){
 	$("#addquestion").click(function(){
-		$("#questions").append("<ol>Question" + question_number + "<input type='text'>");
+	    $n = question_number.toString();
+		$("#questions").append("<ol class='new_questions'>Question" + question_number + "<input type='text' class='" + $n + "'>");
 		question_number += 1;});
-		
-})
+});

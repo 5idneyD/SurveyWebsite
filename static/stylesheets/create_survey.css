@@ -22,29 +22,57 @@ body {
 }
 #header {
 	margin-top: 15%;
+	margin-left: -2%;
 	font-size: 22;
 }
-#builder {
-	margin-top: 80%;
-	width: 100%;
+#subheader{
+	margin-left: -10%;
 }
-button{
-	width: 35%;
-	height: 4%;
-	background: rgba(100, 100, 200, 0.9);
-	color: white;
+#builder {
+	position: absolute;
+	margin-top: 80%;
+	width: 50%;
+	margin-left: -26%;
+
 }
 ol {
 	width: 90%;
 	margin: 3%;
-	margin-left: -10%;
+	margin-left: -40%;
+	margin-top: 10%;
 }
 #surveynamer {
 	position: absolute;
 	margin-top: 40%;
-	width: 100%;
+	margin-left: -20%;
 	color:  rgba(100, 100, 200, 1);
 }
 input {
 		border: 3px solid rgba(100, 100, 200, 1);
+		display: flex;
+		justify-content: center;
+
+}
+#buttons {
+	position: relative;
+	margin-top:10%;
+	width: 90%;
+	margin-left: 7%;
+}
+button{
+	position: relative;
+	margin-top: 5%;
+	width: 100%;
+	height: 60%;
+	background: rgba(100, 100, 200, 0.9);
+	color: white;
+}
+#submit {
+	margin-top: 10%;
+}
+#addquestion {
+	position: absolute;
+	height: 3%;
+	width: 50%;
+	margin-top: 67%;
 }
