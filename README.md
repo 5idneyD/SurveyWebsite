@@ -1,4 +1,4 @@
-# My first Git Repo
+# Survey Heaven
 
 Hello, my name is Sidney, and I'm making a website where users can create their own surveys.
 They can then have people answer their surveys.
