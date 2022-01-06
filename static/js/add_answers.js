@@ -3,4 +3,6 @@ $(document).ready(function(){
 		$question = $(this).attr("class");
 		$cl = "#" + $question;
 		$($cl).append("<ol><input type='text' name='" + $question + "'></ol>");});
+	$("#submitbutton").click(function(){
+	});
 });
