@@ -50,10 +50,12 @@ button{
 	color: white;
 }
 #submitbutton{
+	position: relative;
 	margin-top: 20%;
 	background: rgba(100, 100, 200, 0.9);
 	color: white;
 	width: 100%;
+	height: 40px;
 	border: 1px solid black;
 	margin-bottom: 70%;
 }
