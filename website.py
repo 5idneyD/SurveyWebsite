@@ -148,13 +148,14 @@ def add_answer(encrypted_username, current_survey_name):
     
     questions = db.session.execute("SELECT question FROM questions WHERE survey_name='" + current_survey_name + "';")
 
-    
+    print("---")
     if request.method=="POST":
         print("hello")
         data = dict(request.form)
+        print(data)
+        print("world")
 
-        for key, value in data.items():
-            print(key, value)
+
             
         
 
