@@ -1,9 +1,21 @@
+$num = 1;
+
 $(document).ready(function(){
 	$("button").click(function(){
-		$question = $(this).attr("class");
+		var $question = $(this).attr("class");
+		console.log($question);
 		$cl = "#" + $question;
-		$($cl).append("<ol><input type='text' name='" + $question + "'></ol>");});
+		$($cl).append("<ol><input type='text' name='" + $question + $num.toString() + "'></ol>");
+		$num += 1;});
 	$("#submitbutton").click(function(){
-		$("#answersid").submit();
-	});
+		$data = $("form").serialize()
+		$.ajax({
+			type: 'POST',
+			data: $("form").serialize(),
+			success: function(){
+				console.log($data);
+			}
+
+		});
+		});
 });
