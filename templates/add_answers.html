@@ -18,17 +18,17 @@
 			{%for i in questions%}
 			<div>
 				<h2>{{i[0]}}</h2>
-				<button class={{i[0]}}>Add Answer</button>
-				<form name='answersform' id='answersid'>
-					<ul id={{i[0]}} class='question_head'>
+				<button id={{i[0] +"button"}} class={{i[0]}}>Add Answer</button>
+				<form name={{i[0]}} id='answersform' method='post'>
+					<ul id={{i[0]}} class='question_head' name='question_head'>
 					</ul>
 					
 				</form>
 			</div>
 			{%endfor%}
-			<form method='post'>
-				<input type='submit' method='post' id='submitbutton' name='submitbutton' value="Confirm Answers">
-			</form>
+			
+			<button type='submit' method='post' id='submitbutton' name='submitbutton' value="Confirm Answers">Confirm Answers</button>
+			
 		</div>
 		
 		<script src='/static/js/add_answers.js'></script>
