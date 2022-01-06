@@ -1,0 +1,78 @@
+html{
+	max-width: 100%;
+	font-family: verdana;
+}
+body {
+	display: flex;
+	justify-content: center;
+	padding-left: 2%;
+}
+#welcomebox {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	position: absolute;
+	width: 110%;
+	height: 150px;
+	margin-top: -3%;
+	border-bottom: 2px solid white;
+	color: white;
+	background-color: rgba(100, 100, 200, 0.9)
+	
+}
+#header {
+	margin-top: 15%;
+	margin-left: -2%;
+	font-size: 22;
+}
+#subheader{
+	margin-left: -10%;
+}
+#builder {
+	position: absolute;
+	margin-top: 80%;
+	width: 50%;
+	margin-left: -26%;
+
+}
+ol {
+	width: 90%;
+	margin: 3%;
+	margin-left: -40%;
+	margin-top: 10%;
+}
+#surveynamer {
+	position: absolute;
+	margin-top: 40%;
+	margin-left: -20%;
+	color:  rgba(100, 100, 200, 1);
+}
+input {
+		border: 3px solid rgba(100, 100, 200, 1);
+		display: flex;
+		justify-content: center;
+
+}
+#buttons {
+	position: relative;
+	margin-top:10%;
+	width: 90%;
+	margin-left: 7%;
+}
+button{
+	position: relative;
+	margin-top: 5%;
+	width: 100%;
+	height: 60%;
+	background: rgba(100, 100, 200, 0.9);
+	color: white;
+}
+#submit {
+	margin-top: 10%;
+}
+#addquestion {
+	position: absolute;
+	height: 3%;
+	width: 50%;
+	margin-top: 67%;
+}
