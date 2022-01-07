@@ -7,6 +7,7 @@ c = conn.cursor()
 # CREATE TABLE IF NOT EXISTS accounts (id int, username VARCHAR(255));""")
 
 # c.execute("INSERT INTO accounts values(1, 'Sidney');")
+# conn.commit()
 
 for i in c.execute("SELECT * FROM sqlite_master;"):
     print(i)

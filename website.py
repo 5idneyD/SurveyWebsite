@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import sqlite3
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -86,10 +85,11 @@ def login():
                 current_id = i[0]
                 if i[2] != current_password:
                     print("Password does not match")
-                    data = {
-                        "message": "Password does not match"
-                    }
-                    return render_template("login.html", messages={'main': "Password does not match"})
+
+                    return render_template("login.html",
+                                           messages={
+                                            'main': "Password does not match"})
+                                        
                 else:
                     print("Logged in")
                     encrypted_username = i[3]
@@ -120,7 +120,8 @@ def user_page(encrypted_username):
     for survey in users_surveys:
         surveys.append(survey)
 
-    return render_template("userhome.html", user=user, items=items, create_survey_link=create_survey_link, surveys=surveys)
+    return render_template("userhome.html", user=user, items=items,
+                           create_survey_link=create_survey_link, surveys=surveys)
 
 
 @app.route("/user/<encrypted_username>/create_survey/", methods=['POST', 'GET'])
