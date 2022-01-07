@@ -110,9 +110,17 @@ def user_page(encrypted_username):
         items = dict(i)
 
     encrypted_name = items['encrypted_username']
+    username = items['username']
     create_survey_link = "/user/" + encrypted_name + "/create_survey/"
 
-    return render_template("userhome.html", user=user, items=items, create_survey_link=create_survey_link)
+    users_surveys = db.session.execute(
+        "SELECT survey_name FROM surveys WHERE username='" + username + "';"
+    )
+    surveys = []
+    for survey in users_surveys:
+        surveys.append(survey)
+
+    return render_template("userhome.html", user=user, items=items, create_survey_link=create_survey_link, surveys=surveys)
 
 
 @app.route("/user/<encrypted_username>/create_survey/", methods=['POST', 'GET'])
