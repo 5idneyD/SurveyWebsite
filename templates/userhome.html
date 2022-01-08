@@ -25,7 +25,8 @@
 		<h4 id='sub_header' >Click On Survey<br> To View Results</h4>
 		<ul id='survey_list'>
 			{% for survey in surveys %}
-		<a href='/user/{{encrypted_username}}/survey_results/{{survey[0]}}'><ol id='{{survey[0]}}' class='survey_name'>{{survey[0]}}</ol></a>
+		<a href='/user/{{encrypted_username}}/survey_results/{{survey[1]}}'><ol id='{{survey[1]}}' class='survey_name'>{{survey[1]}}</ol></a>
+		<p>Link to answer Survey: {{survey[0]}}</p>
 			{%endfor%}
 		</ul>
 	</div>

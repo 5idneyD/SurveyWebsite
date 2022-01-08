@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			Survey Website
+		</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/answer_survey.css') }}">
+	</head>
+	
+	<body>
+		<div id='welcomebox'>
+			<h1 id='header'>
+				Welcome to Survey Heaven
+				Survey: {{survey_name}}
+			</h1>
+		</div>
+		
+		<div id='building'>
+				<form name='answer_form' method='post'>
+			{%for key, value in data.items() %}
+			<h2 class='questions'>{{key}}</h2>
+			{% for answer in value %}
+			 <h4 class='answers'>{{answer[1]}} <input type='checkbox' name={{answer[0]}} value={{answer[1]}}></h4>
+			 {% endfor %}
+			{% endfor %}
+							<input type='submit' method='post' name='submitbutton' id='submitbutton'>
+				</form>
+
+			</div>
+
+	</body>
+</html>
