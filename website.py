@@ -38,6 +38,7 @@ class Questions(db.Model):
 
 class Answers(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    survey = db.Column(db.String(255))
     question = db.Column(db.String(255))
     answer = db.Column(db.String(255))
     score = db.Column(db.Integer)
@@ -120,8 +121,9 @@ def user_page(encrypted_username):
     for survey in users_surveys:
         surveys.append(survey)
 
-    return render_template("userhome.html", user=user, items=items,
-                           create_survey_link=create_survey_link, surveys=surveys)
+    return render_template("userhome.html", user=user, username=username,
+                           items=items, create_survey_link=create_survey_link, surveys=surveys,
+                           encrypted_username=encrypted_name)
 
 
 @app.route("/user/<encrypted_username>/create_survey/", methods=['POST', 'GET'])
@@ -174,15 +176,78 @@ def add_answer(encrypted_username, current_survey_name):
         for key, value in data.items():
             key = key[:-1].replace("_", " ")
             print(key, value)
-            new_answer = Answers(question=key, answer=value, score=0)
+            new_answer = Answers(survey=current_survey_name, question=key, answer=value, score=0)
             db.session.add(new_answer)
 
         db.session.commit()
 
-        # return redirect(f"/user/{encrypted_username}/", code=302)
+
         return jsonify({'redirect': url_for("user_page", encrypted_username=encrypted_username)})
     return render_template("add_answers.html", questions=questions)
 
 
+@app.route("/user/<encrypted_username>/survey_results/<survey_name>/", methods=["POST", "GET"])
+def survey_results(encrypted_username, survey_name):
+    
+
+    user = db.session.execute(
+            "SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
+            
+    for i in user:
+        items = dict(i)
+
+    username = items['username']
+    
+    questions = db.session.execute("SELECT question FROM questions WHERE username='" +
+                                                    username + "' AND survey_name='" + survey_name + "';")
+    
+    survey_questions = []
+    
+    for i in questions:
+        items = dict(i)
+        question = items['question']
+        survey_questions.append(question)
+    
+    print(survey_questions)
+        
+    data = {}
+    for question in survey_questions:
+        answers = db.session.execute("SELECT * FROM answers WHERE survey='" +
+                                                        survey_name + "' AND question='" + 
+                                                        question + "';")
+        question_answers = []
+        
+        for i in answers:
+            items = dict(i)
+            question_answers.append([items['answer'], items['score']])
+            
+            
+        data[question] = question_answers
+    
+    print(data)
+    
+        
+        
+    return render_template("survey_results.html", username=username,
+                                        survey_name=survey_name, data=data)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

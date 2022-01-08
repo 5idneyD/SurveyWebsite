@@ -14,10 +14,9 @@ body {
 	width: 110%;
 	height: 150px;
 	margin-top: -3%;
-	margin-left: 7%;
 	border-bottom: 2px solid white;
 	color: white;
-	background-color: rgba(100, 100, 200, 0.9)
+	background-color: rgba(100, 100, 200, 1)
 }
 #header {
 	margin-top: 15%;
@@ -38,9 +37,29 @@ table {
 button{
 	width: 110%;
 	height: 40%;
-	background: rgba(100, 100, 200, 0.9);
+	background: rgba(100, 100, 200, 1);
 }
 a:visited, a:link {
 	font-size: 20;
 	color: white;
+}
+#survey_list {
+	position: absolute;
+	text-align: center;
+	margin: 90% 0% 0% -38%;
+	background: rgba(100, 100, 200, 1);
+	border: 1px solid black;
+	width: 20%;
+}
+ol {
+	position: relative;
+	padding: 30% 10% 30% 20%;
+	width: 100%;
+	margin-left: -50%;
+	font-size: 20;
+}
+#sub_header {
+	position: absolute;
+	width: 100%;
+	margin: 70% 0% 0% -40%;
 }

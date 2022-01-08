@@ -13,7 +13,7 @@
 <body>
 	<div id='welcomebox'>
 		<h1 id='header'>
-			Welcome to Survey Heaven
+			Welcome {{username}}
 		</h1>
 	</div>
 	{% block content %}
@@ -22,9 +22,10 @@
 	</div>
 	{% endblock %}
 	<div>
+		<h4 id='sub_header' >Click On Survey<br> To View Results</h4>
 		<ul id='survey_list'>
 			{% for survey in surveys %}
-			<ol class='survey_name'>{{survey[0]}}</ol>
+		<a href='/user/{{encrypted_username}}/survey_results/{{survey[0]}}'><ol id='{{survey[0]}}' class='survey_name'>{{survey[0]}}</ol></a>
 			{%endfor%}
 		</ul>
 	</div>
