@@ -14,7 +14,7 @@ html{
 	border-bottom: 2px solid white;
 	color: white;
 	background-color: rgba(100, 100, 200, 0.9)
-	
+
 }
 #header {
 	margin-top: 15%;
@@ -27,7 +27,7 @@ html{
 	margin-top: 23%;
 	width: 100%;
 	color: white;
-	
+
 }
 #login {
 	margin-left: -150%;
@@ -36,9 +36,9 @@ html{
 }
 #signup {
 	margin-left: 10%;
-	margin-top: -21%;
+	margin-top: -10%;
 	position: absolute;
-	width: 30%;
+	width: 35%;
 }
 button {
 	color: rgba(100, 100, 200, 0.9);
@@ -122,7 +122,7 @@ ol {
 	margin-top: -10%;
 }
 .handle{
-		
+
 	border: 5px solid grey;
 	z-index: 51;
 	position: absolute;
@@ -132,7 +132,7 @@ ol {
 #lefthandle {
 	border-radius: 100% 100% 0% 100%;
 	margin-top: 50%;
-	margin-left: 69%;	
+	margin-left: 69%;
 }
 #righthandle {
 	border-radius: 100% 100% 100% 0%;
