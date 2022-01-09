@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			Survey Website
+		</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/survey_completed.css') }}">
+	</head>
+	
+	<body>
+		<div id='welcomebox'>
+			<h1 id='header'>
+				Welcome to Survey Heaven
+			</h1>
+		</div>
+		<div id='final_message'>
+			<h3>Thanks for completing this survey!</h3>
+		</div>
+		<div id='other_surveys'>
+			<h4>
+				Want to answer another survey?<br>
+			Click on a name below to start!<br></h4>
+			<div id='optional_surveys'>
+				<form method='post'>
+					<ul id='available_surveys'>
+						{% for survey in surveys %}
+						<a href='/answer_survey/{{survey[1]}}' class='survey_link'>
+							{{survey[0]}}
+						</a>
+						{% endfor %}
+					</ul>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

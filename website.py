@@ -290,8 +290,7 @@ def answer_survey(survey_id):
     if request.method=='POST':
 
         for item in items_id:
-            # print("---------------")
-            # print(item, type(item))
+
             answer = request.form.getlist(str(item))
             
             if len(answer) > 0:
@@ -300,10 +299,31 @@ def answer_survey(survey_id):
                 db.session.execute(f"UPDATE answers SET score=score+1 WHERE id={item};")
                 db.session.commit()
         
-        return redirect("/")
+        return redirect(url_for("survey_completed"))
 
         
     return render_template("answer_survey.html", data=data, survey_name=survey)
+
+
+@app.route("/survey_completed/", methods=['POST', 'GET'])
+def survey_completed():
+    
+    public_surveys = db.session.execute("SELECT * FROM surveys WHERE survey_type='public'")
+    surveys = []
+    for i in public_surveys:
+        items = dict(i)
+        surveys.append([items['survey_name'], items['id']])
+            
+    print(surveys)
+    
+    if request.method=='POST':
+    
+        survey_id = request.form.get("submit_button")
+        print("-------")
+        print(survey_id)
+        return redirect(url_for("survey_completed"))
+
+    return render_template("survey_completed.html", surveys=surveys)
 
 
 if __name__ == "__main__":
