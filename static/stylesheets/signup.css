@@ -40,3 +40,7 @@ button {
 	width: 100%;
 	
 }
+#message {
+	position: absolute;
+	margin-top: 100%;
+}

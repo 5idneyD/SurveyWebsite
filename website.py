@@ -59,15 +59,38 @@ def signup():
     if request.method == "POST":
 
         new_password = request.form['password']
+        second_password = request.form['password2']
         new_username = request.form['username']
         encrypted_name = ''.join(format(ord(x), "b") for x in new_username)
-
-        new_user = Users(username=new_username, password=new_password,
-                         encrypted_username=encrypted_name)
-        db.session.add(new_user)
-        db.session.commit()
-
-    return render_template("signup.html")
+        
+        used_usernames = db.session.execute("SELECT username FROM users;")
+        usernames_taken = []
+        for name in used_usernames:
+            usernames_taken.append(name[0])
+        print("--------------")
+        print(usernames_taken)
+        print(new_username)
+        print("--------------")
+        
+        if new_username in usernames_taken:
+        
+            message = "This username is already taken, please try another"
+            return render_template("signup.html", message=message)
+        
+        elif new_password != second_password:
+            message = "These passwords do not match, please try again"
+            return render_template("signup.html", message=message)
+        
+        else:
+            new_user = Users(username=new_username, password=new_password,
+                             encrypted_username=encrypted_name)
+            db.session.add(new_user)
+            db.session.commit()
+        
+            return redirect(f"/user/{encrypted_name}")
+    
+    message = ""
+    return render_template("signup.html", message=message)
 
 
 @app.route("/login", methods=['POST', 'GET'])
@@ -83,15 +106,17 @@ def login():
 
         users = db.session.execute("SELECT * FROM users;")
         current_id = False
+        
         for i in users:
+        
             if i[1] == current_username:
                 current_id = i[0]
+                
                 if i[2] != current_password:
-                    print("Password does not match")
+                    message = "Password does not match username, please try again"
 
                     return render_template("login.html",
-                                           messages={
-                                            'main': "Password does not match"})
+                                           message=message)
                                         
                 else:
                     print("Logged in")
@@ -99,9 +124,14 @@ def login():
                     return redirect(f"/user/{encrypted_username}")
 
         if current_id == False:
-            print("Username not found")
+            message="Username not found, please try again"
+            return render_template("login.html",
+                                           message=message)
 
-    return render_template("login.html")
+
+    message = ""
+    return render_template("login.html", message=message)
+    
 
 
 @app.route("/user/<encrypted_username>", methods=['POST', 'GET'])
@@ -143,6 +173,7 @@ def create_survey(encrypted_username):
             if key == "surveyname":
                 pass
             else:
+                
                 questions.append(value)
         print(questions)
 
@@ -157,6 +188,7 @@ def create_survey(encrypted_username):
         db.session.add(new_survey)
 
         for question in questions:
+            question = question.replace("?", "")
             new_question = Questions(
                 username=survey_creator_username,  survey_name=current_survey_name, question=question)
             db.session.add(new_question)
@@ -190,7 +222,7 @@ def add_answer(encrypted_username, current_survey_name):
 
         data = dict(request.form)
         for key, value in data.items():
-            key = key[:-1].replace("_", " ")
+            key = key[:-1].replace("_", " ").replace("?", "")
             
             new_answer = Answers(username=current_username, survey=current_survey_name, question=key, answer=value, score=0)
             db.session.add(new_answer)

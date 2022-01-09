@@ -28,9 +28,10 @@
 					<ul id='available_surveys'>
 						{% for survey in surveys %}
 						<a href='/answer_survey/{{survey[1]}}' class='survey_link'>
-							{{survey[0]}}
+							{{survey[0]}}<br>
 						</a>
 						{% endfor %}
+						<a href='/'><br>Or Go Home</a>
 					</ul>
 				</form>
 			</div>

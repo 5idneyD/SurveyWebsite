@@ -39,7 +39,7 @@ body {
 	color: rgba(60, 60, 200, 1);
 	position: absolute;
 	margin-top: 100%;
-	margin-left: 45%;
+	margin-left: 30%;
 	width: 90%;
 	display: flex;
 	justify-content: center;
@@ -56,8 +56,8 @@ body {
 }
 #available_surveys {
 	position: relative;
-	margin-left: -100%;
-	margin-top: 70%;
+	margin-left: -215%;
+	margin-top: 130%;
 	height: 150;
 }
 .survey_link{
