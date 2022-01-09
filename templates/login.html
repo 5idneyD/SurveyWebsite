@@ -12,16 +12,16 @@
 		</div>
 		<div id='createaccount'>
 			<form id='newaccount' method='post'>
-			<p>Enter Username<input name="username" id='username' type='text'></p>
-			<p>Enter Password<input name="password" id='password' type='text'></p>
-			<input type='submit' id='submitbutton' value="Log-In">
+				<p>Enter Username<input name="username" id='username' type='text'></p>
+				<p>Enter Password<input name="password" id='password' type='text'></p>
+				<input type='submit' id='submitbutton' value="Log-In">
 			</form></div>
 			<div style='width: 100%;'>
-			{%for i in data%}
-			<p>{{i[0]}}</p>
-			{%endfor%}
-			<div id='message'>
-			<h2>{{message}}</h2></div>
+				{%for i in data%}
+				<p>{{i[0]}}</p>
+				{%endfor%}
+				<div id='message'>
+				<h2>{{message}}</h2></div>
 			</div>
 	</body>
 </html>	

@@ -188,7 +188,7 @@ def create_survey(encrypted_username):
         db.session.add(new_survey)
 
         for question in questions:
-            question = question.replace("?", "")
+            question = question.replace("?", "").replace("'", "").replace('"', '')
             new_question = Questions(
                 username=survey_creator_username,  survey_name=current_survey_name, question=question)
             db.session.add(new_question)
