@@ -145,3 +145,50 @@ ol {
 	margin-top: 14%;
 	margin-left: 22%;
 }
+
+.ranking{
+	position: absolute;
+	height: 6%;
+	width: 20%;
+	border: 3px solid black;
+	margin-top: 28%;
+	margin-left: -34%;
+	border-radius: 100% 100% 0% 0%;
+	background: linear-gradient(to right, red 25%, rgb(212, 116, 92) 25% 50%, rgb(148, 218, 126) 50% 75%, green 75%)
+}
+#handle {
+	position: relative;
+	height: 120%;
+	width: 6%;
+	background: white;
+	border: 2px solid black;
+	margin-left: 47%;
+	margin-top: 12%;
+	animation: arrow 4s linear infinite;
+}
+#ball {
+	position: relative;
+	height: 70%;
+	width: 20%;
+	background: black;
+	margin-left: 40%;
+	margin-top: -8%;
+	border-radius: 100%;
+}
+@keyframes arrow {
+	from {
+		transform: rotate(150deg);
+	}
+	25% {
+		transform: rotate(180deg);
+	}
+	50% {
+		transform: rotate(210deg);
+	}
+	75% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(150deg);
+	}
+}
