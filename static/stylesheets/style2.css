@@ -55,5 +55,93 @@ a:link, a:visited {
 }
 ul {
 	float: center;
-	margin-top: 30%;
+	text-align: center;
+	margin-top: 5%;
+	position: absolute;
+	font-size: 20;
+}
+ol {
+	width: 50%;
+	font-size: 25;
+	text-align: center;
+	margin: 20% 50% 5% -50%;
+	opacity: 0;
+	-ms-animation-fill-mode: forwards;
+	-webkit-animation-fill-mode: forwards;
+}
+@keyframes fadeIn {
+	to {opacity: 1;}
+}
+
+#board {
+	position: absolute;
+	border: 4px solid rgb(133, 60, 8);
+	background: rgb(133, 60, 8);
+	border-radius: 5%;
+	height: 12%;
+	width: 8%;
+	margin-top: 15%;
+	margin-left: 18%;
+	display: flex;
+	justify-content: center;
+}
+#paper {
+	position: relative;
+	height: 90%;
+	width: 90%;
+	background: white;
+	margin: auto;
+}
+.boxes {
+	position: relative;
+	width: 20%;
+	height: 10%;
+	border: 2px solid black;
+	margin-top: 12%;
+	margin-left: 7%;
+}
+.redcross {
+	position: absolute;
+	height: 18%;
+	width: 3%;
+	background: red;
+	 margin-left: 17%;
+	 margin-top: 11%;
+}
+#cross1 {
+	transform: rotate(50deg);
+}
+#cross2 {
+   transform: rotate(-50deg);
+}
+.lines {
+	position: absolute;
+	width: 50%;
+	height: 3%;
+	background: black;
+	margin-left: 40%;
+	margin-top: -47%;
+}
+#line2 {
+	margin-top: -25%;
+}
+#line3 {
+	margin-top: -7%;
+}
+.handle{
+	position: absolute;
+	border: 5px solid rgb(184, 181, 181);
+	z-index: 51;
+	width:1%;
+	height: 2%;
+}
+#lefthandle {
+	border-radius: 100% 100% 0% 100%;
+	margin-top: 14%;
+	margin-left: 21%;
+}
+#righthandle {
+	border-radius: 100% 100% 100% 0%;
+	margin-top: 14%;
+	margin-left: 22%;
 }
