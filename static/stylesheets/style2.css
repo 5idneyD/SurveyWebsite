@@ -145,3 +145,11 @@ ol {
 	margin-top: 14%;
 	margin-left: 22%;
 }
+#chartdiv {
+	position: absolute;
+	margin-top: 22%;
+	margin-left: -37%;
+	z-index: 51;
+	width: 500px;
+	height: 300px
+}
