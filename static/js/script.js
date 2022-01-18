@@ -22,3 +22,23 @@ function here(element){
 	{"animation": animation});
 }
 };
+
+
+
+// This will build the example chart on the home page
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+	type:'bar',
+	data: {
+		labels: ["Apple", "Pear", "Orange"],
+		datasets: [{
+			label: "No. of Votes",
+			data: [6, 5, 2,0],
+			backgroundColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+			],
+		}]
+	},
+});
