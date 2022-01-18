@@ -41,4 +41,11 @@ var myChart = new Chart(ctx, {
 			],
 		}]
 	},
+	options: {
+		plugins: {
+			title: {
+				display: false
+			}
+		}
+	}
 });
