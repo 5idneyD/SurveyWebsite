@@ -32,7 +32,7 @@ var myChart = new Chart(ctx, {
 	data: {
 		labels: ["Apple", "Pear", "Orange"],
 		datasets: [{
-			label: "No. of Votes",
+			label: "What's Your Favourite Fruit?",
 			data: [6, 5, 2,0],
 			backgroundColor: [
                 'rgba(75, 192, 192, 1)',
