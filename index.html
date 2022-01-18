@@ -1,0 +1,55 @@
+<!DOCTYPE html5>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Survey Website</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+		<link rel="stylesheet" media="screen and (min-width: 901px)" href="{{ url_for('static', filename='stylesheets/style2.css') }}">
+		<link rel="stylesheet" media="screen and (max-width: 900px)" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+	</head>
+	<body>
+		<div id='welcomebox'>
+			<div>
+				<h1 id='header'>Welcome to Survey Heaven</h1>
+			</div>
+			<div class='enteraccount'>
+			<form method='post'>
+				<div id='login'><h3><button name='login'><a href='login'>Log-In</a></button></h3></div>
+				<div id='signup'><h3><button name='signup'><a href='signup'>Sign-Up</a></button></h3></div>
+			</form>
+			</div>
+		</div>
+	</div>
+	<div id='app'>
+		<div class='handle' id='lefthandle'></div>
+		<div class='handle' id='righthandle'></div>
+		<div id='board'><div id='paper'>
+			<div class='redcross' id='cross1'></div>
+			<div class='redcross' id='cross2'></div>
+			<div class='boxes'></div>
+			<div class='boxes'></div>
+			<div class='boxes'></div>
+			<div class='lines' id='line1'></div>
+			<div class='lines' id='line2'></div>
+			<div class='lines' id='line3'></div>
+			</div></div>
+			<div id='chartdiv'>
+		<canvas id='myChart' width='200' height='100'></canvas>
+	</div>
+		<div class='features'>
+			<ul>
+				<ol id='one'>Come here to create personalized surveys for free!</ol>
+				<ol id='two' style='float: right;'>You can create as many surveys as you want</ol>
+				<ol id='three' style='float: left;'>There can be unlimited questions</ol>
+				<ol id='four' style='float: right;'>As well as unlimited answers</ol>
+				<ol id='five' style='float: left;'>And as many people can answer as you want</ol>
+				<ol id='six' style='float: right; display: hidden;'>Only want certain people to answer?</ol>
+				<ol id='seven' style='float: left;'>Make it a Private Survey and give the Key to just them!</ol>
+			</ul>
+		</div>
+	</div>
+	<script src="/static/js/script.js"></script>
+</body>
+</html>
