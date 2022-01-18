@@ -1,0 +1,49 @@
+
+body {
+	display: flex;
+	justify-content: center;
+}
+#welcomebox {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	position: absolute;
+	width: 103%;
+	height: 150px;
+	margin-top: -3%;
+	margin-left: -0%;
+	padding-top: 5%;
+	border-bottom: 2px solid white;
+	color: white;
+	background-color: rgba(100, 100, 200, 0.9)
+}
+#createaccount{
+	position: absolute;
+	margin-top: 20%;
+	border: 2px solid rgba(100, 100, 200, 0.9);
+	width: 70%;
+	padding: 2%;
+}
+#username, #password, #password2{
+	margin-left: 5%;
+	margin-top: 3%;
+}
+p {
+	margin-left: 35%;
+}
+#password2 {
+	margin-left: 3%;
+}
+#submitbutton, #login {
+	width: 20%;
+	margin-left: 37.5%;
+	margin-top: 5%;
+}
+button {
+	width: 100%;
+	
+}
+#message {
+	position: absolute;
+	margin-top: 100%;
+}
