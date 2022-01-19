@@ -1,4 +1,4 @@
-# Survey Heaven
+# SurveyHeaven.co.uk
 
 Hey, I'm making a website where users can create their own surveys.
 Similar to Survey Monkey only everything is free (and better).
