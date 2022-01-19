@@ -40,6 +40,7 @@ body{
 	margin-left: 15%;
 	position: relative;
 	float: right;
+	z-index: 51;
 }
 button[name='login'], button[name='signup'] {
 	width: 100px;

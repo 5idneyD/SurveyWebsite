@@ -313,7 +313,8 @@ def answer_survey(survey_id):
              items_id.append(items['id'])
 
              question_answers.append([items['id'], items['answer'], items['score']])
-             
+        
+         print(question_answers)
          data[question] = question_answers
     
     

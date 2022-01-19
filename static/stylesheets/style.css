@@ -39,6 +39,7 @@ html{
 	margin-top: -15.5%;
 	position: absolute;
 	width: 42%;
+	z-index: 51;
 }
 button {
 	color: rgba(100, 100, 200, 0.9);
