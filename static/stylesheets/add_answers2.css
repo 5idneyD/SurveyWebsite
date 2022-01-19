@@ -1,0 +1,71 @@
+html {
+	max-width: 100%;
+	font-family: verdana;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	padding-left: 2%;
+}
+
+#welcomebox {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	position: absolute;
+	width: 110%;
+	height: 150px;
+	padding-top: 5%;
+	margin-top: -3%;
+	border-bottom: 2px solid white;
+	color: white;
+	background-color: rgba(100, 100, 200, 0.9)
+}
+
+#header {
+	margin-top: 2%;
+	margin-left: -2%;
+	font-size: 22;
+
+}
+
+#building {
+	position: absolute;
+	margin-top: 13%;
+	margin-left: -5%;
+}
+
+ol {
+	margin-top: 10%;
+	margin-left: -10%;
+}
+
+.question_head {
+	float: right;
+}
+
+h2 {
+	color: rgba(100, 100, 200, 0.9);
+}
+
+input {
+	margin: 2%;
+	border: 2px solid rgba(100, 100, 200, 0.9);
+}
+
+button {
+	background: rgba(100, 100, 200, 0.9);
+	color: white;
+}
+
+#submitbutton {
+	position: relative;
+	margin-top: 20%;
+	background: rgba(100, 100, 200, 0.9);
+	color: white;
+	width: 100%;
+	height: 40px;
+	border: 1px solid black;
+	margin-bottom: 70%;
+}
