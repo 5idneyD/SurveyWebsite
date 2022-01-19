@@ -6,12 +6,15 @@
 			Survey Website
 		</title>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/create_survey.css') }}">
+		<link rel="stylesheet" media="screen and (min-width: 901px)"
+		href="{{ url_for('static', filename='stylesheets/create_survey2.css') }}">
+	<link rel="stylesheet" media="screen and (max-width: 900px)"
+		href="{{ url_for('static', filename='stylesheets/create_survey.css') }}">
 	</head>
 	<body>
 		<div id='welcomebox'>			
 			<h1 id='header'>
-				Welcome to Survey Heaven
+				Create A Survey
 			</h1>
 		</div>
 		<button id='addquestion'>Add Question</button>
