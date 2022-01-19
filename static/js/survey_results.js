@@ -1,6 +1,8 @@
 var labels = [];
 var scores = [];
-var create_chart = function (labels, scores) {
+
+
+var create_chart = function (question, labels, scores) {
 
     var ctx = document.getElementById("myChart");
     console.log(labels);
@@ -10,13 +12,14 @@ var create_chart = function (labels, scores) {
         data: {
             labels: labels,
             datasets: [{
+                label: question,
                 data: scores,
                 backgroundColor: [
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
-                borderColor: "rgba(100, 100, 200, 0.9)"
+                
             }]
         },
     });
