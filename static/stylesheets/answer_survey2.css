@@ -1,0 +1,50 @@
+html {
+	max-width: 100%;
+	font-family: verdana;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	padding-left: 2%;
+}
+
+#welcomebox {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	position: absolute;
+	width: 110%;
+	height: 150px;
+	padding-top: 5%;
+	margin-top: -3%;
+	border-bottom: 2px solid white;
+	color: white;
+	background-color: rgba(100, 100, 200, 0.9)
+}
+
+#header {
+	margin-top: 2%;
+	margin-left: -2%;
+	font-size: 22;
+
+}
+
+#building {
+	color: rgba(60, 60, 200, 1);
+	margin-top: 15%;
+}
+.questions {
+	margin-left: -40%;
+	
+}
+.answers {
+	padding: 10% 0% 10% 0%;
+}
+#submitbutton {
+	padding: 10%;
+	width: 100%;
+	height: 5%;
+	background:  rgba(100, 100, 200, 0.9);
+	color: white;
+}
