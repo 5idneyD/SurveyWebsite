@@ -15,24 +15,23 @@ body {
 	text-align: center;
 	position: absolute;
 	width: 110%;
-	height: 150px;
+	height: 250px;
 	margin-top: -3%;
 	border-bottom: 2px solid white;
 	color: white;
-	background-color: rgba(100, 100, 200, 0.9);
-
+	background-color: rgba(100, 100, 200, 1)
 }
 
 #header {
-	margin-top: 15%;
+	margin-top: 5%;
 	margin-left: -2%;
-	font-size: 22;
+	font-size: 28;
 }
 
 #final_message {
 	color: rgba(60, 60, 200, 1);
 	position: absolute;
-	margin-top: 60%;
+	margin-top: 15%;
 	width: 90%;
 	display: flex;
 	justify-content: center;
@@ -40,11 +39,12 @@ body {
 }
 
 #other_surveys {
+	position: absolute;
 	text-decoration: bold;
 	color: rgba(60, 60, 200, 1);
 	position: absolute;
-	margin-top: 100%;
-	margin-left: 30%;
+	margin-top: 23%;
+	margin-left: -5%;
 	width: 90%;
 	display: flex;
 	justify-content: center;
@@ -52,33 +52,24 @@ body {
 }
 
 #available_surveys {
-	position: relative;
-	margin-top: 130%;
-	margin-left: -180%;
-	margin-right: 130%;
-}
-
-.survey_list {
-	padding-top: 7%;
-}
-
-#available_surveys {
-	position: relative;
-	margin-left: -215%;
-	margin-top: 130%;
+	text-align: center;
+	float: center;
+	margin-top: 10%;
+	margin-left: 30%;
 	height: 150;
-}
-
-.survey_link {
-	padding-top: 15%;
-	padding-bottom: 15%;
 }
 
 a:visited, a:link {
 	font-size: 20;
 	color: rgba(60, 60, 200, 1);
+	margin-top: 20%;
 }
 
-br {
-	padding-bottom: 100%;
+#optional_surveys {
+	margin-top: 10%;
+	margin-left: -15%;
+}
+
+#home {
+	margin-top: 50%;
 }
