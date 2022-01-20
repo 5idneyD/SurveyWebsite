@@ -23,12 +23,12 @@
 		<div id='building'>
 				<form name='answer_form' method='post'>
 			{%for key, value in data.items() %}
-			<h2 class='questions'>{{key}}</h2>
+			<h2 class='questions'>{{key.replace("_", " ")}}</h2>
 			{% for answer in value %}
-			 <h4 class='answers'>{{answer[1]}} <input type='checkbox' name={{answer[0]}} value={{answer[1]}}></h4>
+			 <h4 class='answers'>{{answer[1].replace("_", " ")}} <input type='checkbox' name={{answer[0]}} value={{answer[1]}}></h4>
 			 {% endfor %}
 			{% endfor %}
-							<input type='submit' method='post' name='submitbutton' id='submitbutton'>
+						<input type='submit' method='post' name='submitbutton' id='submitbutton'>
 				</form>
 
 			</div>

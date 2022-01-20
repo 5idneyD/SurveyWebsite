@@ -22,8 +22,8 @@
 	<div id='building'>
 		{%for i in questions%}
 		<div>
-			<h2>{{i[0]}}</h2>
-			<button class={{i[0].replace(" ", " _").replace("?", "" )}}>Add Answer</button>
+			<h2>{{i[0].replace("_", " ")}}</h2>
+			<button class='{{i[0].replace(" ", " _").replace("?", "" )}}'>Add Answer</button>
 			<form name={{i[0].replace(" ", " _").replace("?", "" )}} id='answersform' method='post'>
 				<ul id={{i[0].replace(" ", " _").replace("?", "" )}} class='question_head' name='question_head'>
 				</ul>

@@ -62,33 +62,30 @@ def signup():
         second_password = request.form['password2']
         new_username = request.form['username']
         encrypted_name = ''.join(format(ord(x), "b") for x in new_username)
-        
+
         used_usernames = db.session.execute("SELECT username FROM users;")
         usernames_taken = []
         for name in used_usernames:
             usernames_taken.append(name[0])
-        print("--------------")
-        print(usernames_taken)
-        print(new_username)
-        print("--------------")
-        
+
+
         if new_username in usernames_taken:
-        
+
             message = "This username is already taken, please try another"
             return render_template("signup.html", message=message)
-        
+
         elif new_password != second_password:
             message = "These passwords do not match, please try again"
             return render_template("signup.html", message=message)
-        
+
         else:
             new_user = Users(username=new_username, password=new_password,
                              encrypted_username=encrypted_name)
             db.session.add(new_user)
             db.session.commit()
-        
+
             return redirect(f"/user/{encrypted_name}")
-    
+
     message = ""
     return render_template("signup.html", message=message)
 
@@ -106,18 +103,18 @@ def login():
 
         users = db.session.execute("SELECT * FROM users;")
         current_id = False
-        
+
         for i in users:
-        
+
             if i[1] == current_username:
                 current_id = i[0]
-                
+
                 if i[2] != current_password:
                     message = "Password does not match username, please try again"
 
                     return render_template("login.html",
                                            message=message)
-                                        
+
                 else:
                     print("Logged in")
                     encrypted_username = i[3]
@@ -131,7 +128,7 @@ def login():
 
     message = ""
     return render_template("login.html", message=message)
-    
+
 
 
 @app.route("/user/<encrypted_username>", methods=['POST', 'GET'])
@@ -149,7 +146,7 @@ def user_page(encrypted_username):
     users_surveys = db.session.execute(
         "SELECT id, survey_name FROM surveys WHERE username='" + username + "';"
     )
-    
+
     surveys = []
     for survey_id, survey in users_surveys:
         survey_link = url_for("answer_survey", survey_id=survey_id)
@@ -173,7 +170,7 @@ def create_survey(encrypted_username):
             if key == "surveyname":
                 pass
             else:
-                
+
                 questions.append(value)
         print(questions)
 
@@ -188,7 +185,7 @@ def create_survey(encrypted_username):
         db.session.add(new_survey)
 
         for question in questions:
-            question = question.replace("?", "").replace("'", "").replace('"', '')
+            question = question.replace("?", "").replace("'", "").replace('"', '').replace(" ", "_")
             new_question = Questions(
                 username=survey_creator_username,  survey_name=current_survey_name, question=question)
             db.session.add(new_question)
@@ -202,18 +199,18 @@ def create_survey(encrypted_username):
 
 @app.route("/user/<encrypted_username>/create_survey/<current_survey_name>/add_answers/", methods=["POST", "GET"])
 def add_answer(encrypted_username, current_survey_name):
-    
+
     user = db.session.execute(
             "SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
-            
+
     for i in user:
         items = dict(i)
 
     current_username = items['username']
-    
-    
+
+
     questions = db.session.execute(
-        "SELECT question FROM questions WHERE survey_name='" + current_survey_name + 
+        "SELECT question FROM questions WHERE survey_name='" + current_survey_name +
         "' AND username='" + current_username + "';")
 
     print(questions)
@@ -221,9 +218,12 @@ def add_answer(encrypted_username, current_survey_name):
     if request.method == "POST":
 
         data = dict(request.form)
+        print(data)
         for key, value in data.items():
-            key = key[:-1].replace("_", " ").replace("?", "")
-            
+            print(key, value)
+            print(key[:-1])
+            key = key[:-1].replace(" ", "_").replace("?", "")
+            print(key)
             new_answer = Answers(username=current_username, survey=current_survey_name, question=key, answer=value, score=0)
             db.session.add(new_answer)
 
@@ -236,76 +236,76 @@ def add_answer(encrypted_username, current_survey_name):
 
 @app.route("/user/<encrypted_username>/survey_results/<survey_name>/", methods=["POST", "GET"])
 def survey_results(encrypted_username, survey_name):
-    
+
 
     user = db.session.execute(
             "SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
-            
+
     for i in user:
         items = dict(i)
 
     username = items['username']
-    
+
     questions = db.session.execute("SELECT question FROM questions WHERE username='" +
                                                     username + "' AND survey_name='" + survey_name + "';")
-    
+
     survey_questions = []
-    
+
     for i in questions:
         items = dict(i)
         question = items['question']
         survey_questions.append(question)
-    
 
-        
+
+
     data = {}
     for question in survey_questions:
         answers = db.session.execute("SELECT * FROM answers WHERE survey='" +
-                                                        survey_name + "' AND question='" + 
+                                                        survey_name + "' AND question='" +
                                                         question + "' AND username='" +
                                                         username + "';")
         question_answers = []
-        
+
         for i in answers:
             items = dict(i)
             question_answers.append([items['answer'], items['score']])
-            
-            
+
+
         data[question] = question_answers
-        
-        
+
+
     return render_template("survey_results.html", username=username,
                                         survey_name=survey_name, data=data)
 
 
 @app.route("/answer_survey/<survey_id>", methods=['POST', 'GET'])
 def answer_survey(survey_id):
-    
+
     surveys = db.session.execute("SELECT * FROM surveys WHERE id=" + survey_id + ";")
     for i in surveys:
         items = dict(i)
-        
+
     username = items['username']
     survey = items['survey_name']
-    
+
     questions = db.session.execute("SELECT * FROM questions WHERE username='" +
                                                     username + "' AND survey_name='" +
                                                     survey + "';")
-    
+
     current_questions = []
     for i in questions:
         current_questions.append(i[3])
 
-        
+
     data = {}
     items_id = []
     for question in current_questions:
 
          answers = db.session.execute("SELECT * FROM answers WHERE survey='" +
-                                                        survey + "' AND question='" + 
+                                                        survey + "' AND question='" +
                                                         question + "' AND username='" +
                                                         username + "';")
-   
+
          question_answers = []
 
          for i in answers:
@@ -313,44 +313,44 @@ def answer_survey(survey_id):
              items_id.append(items['id'])
 
              question_answers.append([items['id'], items['answer'], items['score']])
-        
+
          print(question_answers)
          data[question] = question_answers
-    
-    
 
-    
+
+
+
     if request.method=='POST':
 
         for item in items_id:
 
             answer = request.form.getlist(str(item))
-            
+
             if len(answer) > 0:
-            
+
                 print(answer, item)
                 db.session.execute(f"UPDATE answers SET score=score+1 WHERE id={item};")
                 db.session.commit()
-        
+
         return redirect(url_for("survey_completed"))
 
-        
+
     return render_template("answer_survey.html", data=data, survey_name=survey)
 
 
 @app.route("/survey_completed/", methods=['POST', 'GET'])
 def survey_completed():
-    
+
     public_surveys = db.session.execute("SELECT * FROM surveys WHERE survey_type='public'")
     surveys = []
     for i in public_surveys:
         items = dict(i)
         surveys.append([items['survey_name'], items['id']])
-            
+
     print(surveys)
-    
+
     if request.method=='POST':
-    
+
         survey_id = request.form.get("submit_button")
         print("-------")
         print(survey_id)

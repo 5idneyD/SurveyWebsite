@@ -38,7 +38,7 @@
 			</div>
 			<script>
 				scores.push(0);
-				create_chart("{{key}}", labels, scores);
+				create_chart("{{key.replace('_', ' ')}}", labels, scores);
 				var labels = [];
 				var scores = [];
 			</script>
