@@ -44,6 +44,9 @@ a:visited, a:link {
 	font-size: 20;
 	color: white;
 }
+a[class*='linktext'] {
+    font-size: 16;
+}
 #survey_list {
 	position: absolute;
 	text-align: center;
@@ -64,6 +67,7 @@ ol {
 	width: 100%;
 	margin: 70% 0% 0% -20%;
 	color: rgba(60, 60, 200, 1);
+	text-align: center;
 }
 .linktext {
 	color: white;

@@ -19,7 +19,7 @@ body {
 	border-bottom: 2px solid white;
 	color: white;
 	background-color: rgba(100, 100, 200, 0.9)
-	
+
 }
 #header {
 	margin-top: 1%;
@@ -73,7 +73,8 @@ button{
 	color: white;
 }
 #submit {
-	margin-top: 10%;
+	margin-top: 2%;
+	margin-left: -10%;
 	width: 20%;
 }
 #addquestion {
@@ -82,11 +83,10 @@ button{
 	width: 20%;
 	margin-top: 15%;
 	margin-left: 40%;
-	border-radius: 33%;
 }
 #questions {
-	margin-top: -110%;
-
+	margin-top: -120%;
+    margin-left: -15%;
 }
 .new_questions {
 	position: relative;
