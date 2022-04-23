@@ -48,7 +48,7 @@ class Answers(db.Model):
 
 db.create_all()
 
-
+@app.route("/index.html")
 @app.route("/")
 def index(methods=['POST', 'GET']):
     return render_template("index.html")
