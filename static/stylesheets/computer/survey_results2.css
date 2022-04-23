@@ -38,14 +38,14 @@ body {
 }
 .question {
 	text-decoration: underline;
-	margin-top: 15%;
+	margin-top: 10%;
 	margin-left: 20%;
 	text-align: center;
 }
 .chartdiv, #old_chart {
 	position: relative;
 	/*border: 2px solid black;*/
-	margin: -60% -100% 70% 100%;
+	margin: -90% -100% 70% 80%;
 	width: 300px;
 	height: 300px;
 }
