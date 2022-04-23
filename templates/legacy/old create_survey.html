@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			Survey Website
+		</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+		<link rel="stylesheet" media="screen and (min-width: 901px)"
+		href="{{ url_for('static', filename='stylesheets/computer/create_survey2.css') }}">
+	<link rel="stylesheet" media="screen and (max-width: 900px)"
+		href="{{ url_for('static', filename='stylesheets/mobile/create_survey.css') }}">
+	</head>
+	<body>
+		<div id='welcomebox'>
+			<h1 id='header'>
+				Create A Survey
+			</h1>
+		</div>
+		<button id='addquestion'>Add Question</button>
+		<form id='createsurvey' method='post'>
+			<div id='surveynamer'><h3 id='subheader'>Name this Survey: </h3>
+				<input type='text' id='surveyname' name='surveyname' value='Survey Name'>
+			</div>
+			<div id='builder'>
+				<ul id='questions'>
+				</ul>
+			</form>
+			<div id='buttons'>
+				<button id='submit' type='submit'>Continue</button>
+				<h6>You will add answers on the next page</h6>
+			</div>
+		</div>
+		<script src='/static/js/create_survey.js'></script>
+	</body>
+</html>
