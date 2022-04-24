@@ -33,7 +33,7 @@
 </head>
 <!-- body -->
 
-<body class="main-layout">
+<body class="main-layout" style='background-color: #f0f0f0;'>
    <!-- loader  -->
    <div class="loader_bg">
       <div class="loader"><img src="static/images/loading.gif" alt="#" /></div>
@@ -60,21 +60,21 @@
                         aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                      </button>
+                     <div id="menu_open_close">
                      <div class="collapse navbar-collapse" id="navbarsExample04">
                         <ul class="navbar-nav mr-auto">
 
                            <form method='post'>
-                              <li class="login_btn" class="nav_item">
-                                 <h3><a class="nav-link" href='login'>Log-In</a></h3>
+                              <li class="login_btn" class="nav_item" style="padding-left: 20%; padding-right: 30%; margin-left: auto; margin-right:auto; text-align: left;">
+                                 <h3><a class="nav-link" href='login'>LogIn</a></h3>
                               </li>
                               <br>
-                              <li class="login_btn" class="nav_item">
-                                 <h3><a class="nav-link" href='signup'>Sign-Up</a></h3>
+                              <li class="login_btn" class="nav_item" style="padding-left: 20%; padding-right: 33%; margin-left: auto; margin-right:auto; text-align: left;">
+                                 <h3><a class="nav-link" href='signup'>SignUp</a></h3>
                               </li>
                            </form>
-
-
                         </ul>
+                     </div>
                      </div>
                   </nav>
                </div>
@@ -106,7 +106,7 @@
    </section>
    <!-- end banner -->
    <!-- about -->
-   <div class="about">
+   <div class="about" style='background-color: #f0f0f0;'>
       <div class="container">
          <div class="row">
             <div class="col-md-10 offset-md-1">
@@ -134,7 +134,7 @@
 
    <!-- end about -->
    <!-- classified -->
-   <div class="classified">
+   <div class="about" style='background-color: #f0f0f0;'>
       <div class="container">
          <div class="row">
             <div class="col-md-12">
@@ -149,7 +149,7 @@
 
 
          <!-- testimonial -->
-         <div class="testimonial">
+         <div class="testimonial" style='background-color: #f0f0f0;'>
             <div class="container">
                <div class="row">
                   <div class="col-md-12">
@@ -206,27 +206,18 @@
 
                         <div class="container">
                            <div class="row">
-                              <div class="col-md-12 offset-md-1">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                  <div class="titlepage">
-                                    <div id='createaccount'>
-                                       <form id="newaccount" method="post">
 
-                                          <div style="margin-top: -10%;"
-                                             class="container">
-                                             <div class="login-box animated fadeInUp">
+                                          <div style="margin-top: -3%; width: 60%;" class="container">
+                                             <div class="login-box animated fadeInUp" style="margin-left: auto; margin-right: auto;">
                                                 <form method='post'>
-                                                   <li class="login_btn" class="nav_item" style="text-align: center;">
-
-                                                      <h3><a class="nav-link" href='signup'>Sign-Up</a></h3>
-                                                   </li>
+                                                   <div class="login_btn" class="nav_item" style="text-align: center;">
+                                                      <p style="width: 100%;"><a class="nav-link" href='signup'>Sign-Up</a></p>
+                                                   </div>
                                                 </form>
                                              </div>
                                           </div>
-
-                                       </form>
-
-                                    </div>
-
                                  </div>
                               </div>
                            </div>
@@ -248,6 +239,16 @@
       <script src="static/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="static/js/custom.js"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+    <!--Trying to smooth out navbar toggling function, but cannot find original fnction yet-->
+    <!--Need to remove that before this works-->
+    <!--<script>-->
+    <!--    $(document).ready(function(){-->
+    <!--        $(".navbar-toggler-icon").click(function(){-->
+    <!--            $("#menu_open_close").toggle();-->
+    <!--        });-->
+    <!--    });-->
+    <!--</script>-->
 </body>
 
 </html>

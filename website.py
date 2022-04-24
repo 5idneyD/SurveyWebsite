@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response
+from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response, session
 from flask_sqlalchemy import SQLAlchemy
 import os
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -48,6 +49,8 @@ class Answers(db.Model):
 
 db.create_all()
 
+
+
 @app.route("/index.html")
 @app.route("/")
 def index(methods=['POST', 'GET']):
@@ -90,6 +93,7 @@ def signup():
     return render_template("signup.html", message=message)
 
 
+
 @app.route("/login", methods=['POST', 'GET'])
 def login():
 
@@ -123,7 +127,7 @@ def login():
                         print("Logged in")
                         encrypted_username = i[3]
 
-
+                        session['logged in'] = True
 
                         res = make_response(redirect(f"/user/{encrypted_username}"))
                         res.set_cookie("username", current_username, max_age=60*60*24*365)
@@ -157,7 +161,7 @@ def login():
                     print("Logged in")
                     encrypted_username = i[3]
 
-
+                    session['logged in'] = True
 
                     res = make_response(redirect(f"/user/{encrypted_username}"))
                     res.set_cookie("username", current_username, max_age=60*60*24*365)
@@ -193,15 +197,22 @@ def user_page(encrypted_username):
 
     if request.method == "POST":
 
+        session['logged in'] = False
         res = make_response(redirect("/"))
         res.set_cookie("username", "", max_age=0)
         res.set_cookie("password", "", max_age=0)
 
         return res
 
-    return render_template("userhome.html", user=user, username=username,
-                           items=items, create_survey_link=create_survey_link, surveys=surveys,
-                           encrypted_username=encrypted_name)
+
+    if session['logged in'] == True:
+        return render_template("userhome.html", user=user, username=username,
+                               items=items, create_survey_link=create_survey_link, surveys=surveys,
+                               encrypted_username=encrypted_name)
+    else:
+        return redirect("/login")
+
+
 
 
 @app.route("/user/<encrypted_username>/create_survey/", methods=['POST', 'GET'])
@@ -241,7 +252,11 @@ def create_survey(encrypted_username):
 
         return redirect(f"/user/{encrypted_username}/create_survey/{current_survey_name}/add_answers/")
 
-    return render_template("create_survey.html")
+
+    if session['logged in'] == True:
+        return render_template("create_survey.html")
+    else:
+        return redirect("/login")
 
 
 @app.route("/user/<encrypted_username>/create_survey/<current_survey_name>/add_answers/", methods=["POST", "GET"])
@@ -278,8 +293,11 @@ def add_answer(encrypted_username, current_survey_name):
 
 
         return jsonify({'redirect': url_for("user_page", encrypted_username=encrypted_username)})
-    return render_template("add_answers.html", questions=questions)
 
+    if session['logged in'] == True:
+        return render_template("add_answers.html", questions=questions)
+    else:
+        return redirect("/login")
 
 @app.route("/user/<encrypted_username>/survey_results/<survey_name>/", methods=["POST", "GET"])
 def survey_results(encrypted_username, survey_name):
@@ -321,9 +339,11 @@ def survey_results(encrypted_username, survey_name):
         data[question] = question_answers
 
 
-    return render_template("survey_results.html", username=username,
+    if session['logged in'] == True:
+        return render_template("survey_results.html", username=username,
                                         survey_name=survey_name, data=data)
-
+    else:
+        return redirect("/login")
 
 @app.route("/answer_survey/<survey_id>", methods=['POST', 'GET'])
 def answer_survey(survey_id):
