@@ -62,14 +62,37 @@
 							</div>
 						</div>
 					</div>
+				</div>
 
-					<div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col logo_section">
+
+
+					<br>
+				<div class="row">
+					<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+						<div class="full">
+							<div class="center-desk">
+								<div class="text-bg">
+									<a href="https://www.surveyheaven.co.uk">
+									    <form method="post">
+										<button type="submit" id="submitbutton" value="Log-Out" style="background-color: transparent; color:white;">Log Out</button>
+										</form>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+					<br>
+
+				<div class="row">
+					<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
 						<div class="full">
 							<div class="center-desk">
 								<div class="text-bg">
 
 									{% block content %}
-									<div class="text-bg" style="margin-right: -55%;">
+									<div class="text-bg">
 										<a href={{create_survey_link}}><button name='createsurvey'
 												style="background-color: transparent">
 												<h2 style="color: white;">New Survey</h2>
@@ -81,18 +104,17 @@
 							</div>
 						</div>
 					</div>
-
-					<br>
-
-					<div class="text-bg" style="position: relative; top: 20%; left: 40%;">
-						<div class="text-bg">
-							<button style="background-color: transparent">
-								<h2 style="color: white;">Welcome {{username}}</h2>
-							</button>
-						</div>
 					</div>
 
-				</div>
+					<div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col logo_section">
+						<div class="full">
+							<div class="center-desk">
+								<div class="text-bg">
+										<h2 style="color: white; margin-top: 2%;">Welcome {{username}}</h2>
+								</div>
+							</div>
+						</div>
+					</div>
 			</div>
 		</div>
 

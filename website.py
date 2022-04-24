@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -92,14 +92,52 @@ def signup():
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
-    current_username = False
-    current_password = False
-    if request.method == "POST":
+
+    if not request.cookies.get("username"):
+
+
         current_username = False
         current_password = False
-        current_username = request.form['username']
-        current_password = request.form['password']
-        print(current_username)
+        if request.method == "POST":
+            current_username = False
+            current_password = False
+            current_username = request.form['username']
+            current_password = request.form['password']
+            print(current_username)
+
+            users = db.session.execute("SELECT * FROM users;")
+            current_id = False
+
+            for i in users:
+
+                if i[1] == current_username:
+                    current_id = i[0]
+
+                    if i[2] != current_password:
+                        message = "Password does not match username, please try again"
+
+                        return render_template("login.html",
+                                               message=message)
+
+                    else:
+                        print("Logged in")
+                        encrypted_username = i[3]
+
+
+
+                        res = make_response(redirect(f"/user/{encrypted_username}"))
+                        res.set_cookie("username", current_username, max_age=60*60*24*365)
+                        res.set_cookie("password", current_password)
+
+                        return res
+
+            if current_id == False:
+                message="Username not found, please try again"
+                return render_template("login.html",
+                                               message=message)
+    else:
+        current_username = request.cookies.get("username")
+        current_password = request.cookies.get("password")
 
         users = db.session.execute("SELECT * FROM users;")
         current_id = False
@@ -113,18 +151,19 @@ def login():
                     message = "Password does not match username, please try again"
 
                     return render_template("login.html",
-                                           message=message)
+                                               message=message)
 
                 else:
                     print("Logged in")
                     encrypted_username = i[3]
-                    return redirect(f"/user/{encrypted_username}")
 
-        if current_id == False:
-            message="Username not found, please try again"
-            return render_template("login.html",
-                                           message=message)
 
+
+                    res = make_response(redirect(f"/user/{encrypted_username}"))
+                    res.set_cookie("username", current_username, max_age=60*60*24*365)
+                    res.set_cookie("password", current_password, max_age=60*60*24*365)
+
+                    return res
 
     message = ""
     return render_template("login.html", message=message)
@@ -151,6 +190,14 @@ def user_page(encrypted_username):
     for survey_id, survey in users_surveys:
         survey_link = url_for("answer_survey", survey_id=survey_id)
         surveys.append([survey_link, survey])
+
+    if request.method == "POST":
+
+        res = make_response(redirect("/"))
+        res.set_cookie("username", "", max_age=0)
+        res.set_cookie("password", "", max_age=0)
+
+        return res
 
     return render_template("userhome.html", user=user, username=username,
                            items=items, create_survey_link=create_survey_link, surveys=surveys,
@@ -360,7 +407,7 @@ def survey_completed():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
 
 
 
