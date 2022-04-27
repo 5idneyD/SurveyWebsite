@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response, session
 from flask_sqlalchemy import SQLAlchemy
 import os
+import hashlib
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -82,11 +83,13 @@ def signup():
             return render_template("signup.html", message=message)
 
         else:
-            new_user = Users(username=new_username, password=new_password,
+            encrypted_password = hashlib.sha256(new_password.encode("UTF-8")).hexdigest()
+            new_user = Users(username=new_username, password=encrypted_password,
                              encrypted_username=encrypted_name)
             db.session.add(new_user)
             db.session.commit()
 
+            session['logged in'] = True
             return redirect(f"/user/{encrypted_name}")
 
     message = ""
@@ -107,6 +110,7 @@ def login():
             current_password = False
             current_username = request.form['username']
             current_password = request.form['password']
+            current_password = hashlib.sha256(current_password.encode("UTF-8")).hexdigest()
             print(current_username)
 
             users = db.session.execute("SELECT * FROM users;")
@@ -128,17 +132,23 @@ def login():
                         encrypted_username = i[3]
 
                         session['logged in'] = True
-
+                        message = ""
                         res = make_response(redirect(f"/user/{encrypted_username}"))
-                        res.set_cookie("username", current_username, max_age=60*60*24*365)
-                        res.set_cookie("password", current_password)
+                        res.set_cookie("username", current_username, max_age=60*60*24)
+                        res.set_cookie("password", current_password, max_age=60*60*24)
 
                         return res
 
             if current_id == False:
-                message="Username not found, please try again"
+                # message="Username not found, please try again"
+                message=f"{current_username} not found, please try again"
                 return render_template("login.html",
                                                message=message)
+
+        else:
+            message = ""
+            return render_template("login.html", message=message)
+
     else:
         current_username = request.cookies.get("username")
         current_password = request.cookies.get("password")
@@ -164,8 +174,8 @@ def login():
                     session['logged in'] = True
 
                     res = make_response(redirect(f"/user/{encrypted_username}"))
-                    res.set_cookie("username", current_username, max_age=60*60*24*365)
-                    res.set_cookie("password", current_password, max_age=60*60*24*365)
+                    res.set_cookie("username", current_username, max_age=60*60*24)
+                    res.set_cookie("password", current_password, max_age=60*60*24)
 
                     return res
 
@@ -205,11 +215,14 @@ def user_page(encrypted_username):
         return res
 
 
-    if session['logged in'] == True:
-        return render_template("userhome.html", user=user, username=username,
-                               items=items, create_survey_link=create_survey_link, surveys=surveys,
-                               encrypted_username=encrypted_name)
-    else:
+    try:
+        if session['logged in'] == True:
+            return render_template("userhome.html", user=user, username=username,
+                                   items=items, create_survey_link=create_survey_link, surveys=surveys,
+                                   encrypted_username=encrypted_name)
+        else:
+            return redirect("/login")
+    except Exception:
         return redirect("/login")
 
 
@@ -253,9 +266,12 @@ def create_survey(encrypted_username):
         return redirect(f"/user/{encrypted_username}/create_survey/{current_survey_name}/add_answers/")
 
 
-    if session['logged in'] == True:
-        return render_template("create_survey.html")
-    else:
+    try:
+        if session['logged in'] == True:
+            return render_template("create_survey.html")
+        else:
+            return redirect("/login")
+    except:
         return redirect("/login")
 
 
@@ -294,9 +310,12 @@ def add_answer(encrypted_username, current_survey_name):
 
         return jsonify({'redirect': url_for("user_page", encrypted_username=encrypted_username)})
 
-    if session['logged in'] == True:
-        return render_template("add_answers.html", questions=questions)
-    else:
+    try:
+        if session['logged in'] == True:
+            return render_template("add_answers.html", questions=questions)
+        else:
+            return redirect("/login")
+    except:
         return redirect("/login")
 
 @app.route("/user/<encrypted_username>/survey_results/<survey_name>/", methods=["POST", "GET"])
@@ -339,10 +358,13 @@ def survey_results(encrypted_username, survey_name):
         data[question] = question_answers
 
 
-    if session['logged in'] == True:
-        return render_template("survey_results.html", username=username,
-                                        survey_name=survey_name, data=data)
-    else:
+    try:
+        if session['logged in'] == True:
+            return render_template("survey_results.html", username=username,
+                                            survey_name=survey_name, data=data)
+        else:
+            return redirect("/login")
+    except:
         return redirect("/login")
 
 @app.route("/answer_survey/<survey_id>", methods=['POST', 'GET'])
