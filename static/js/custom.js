@@ -6,6 +6,8 @@ $(function () {
 
 	"use strict";
 
+// 	Index Menu
+
 	/* Preloader
 	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
@@ -18,6 +20,7 @@ $(function () {
 
 	$(document).ready(function () {
 		$('header nav').meanmenu();
+		console.log("Hellllloooooo");
 	});
 
 	/* Tooltip
@@ -339,15 +342,7 @@ $(function () {
 		}]
 	});
 
-	/* Fancybox
-	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
-	$(".fancybox").fancybox({
-		maxWidth: 1200,
-		maxHeight: 600,
-		width: '70%',
-		height: '70%',
-	});
 
 	/* Toggle sidebar
 	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */

@@ -26,6 +26,14 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
       media="screen">
 
+
+    <!--Favicon image-->
+    <link rel="apple-touch-icon" sizes="180x180" href="static/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="static/images/favicon/site.webmanifest">
+
+
 </head>
 <!-- body -->
 
@@ -50,11 +58,14 @@
                      </div>
                   </div>
                </div>
+
+               <!--Button for the drop down menu-->
+
                <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8">
                   <nav class="navigation navbar navbar-expand-md navbar-dark ">
                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
                         aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        <span class="navbar-toggler-icon" id="menu-button" style=""></span>
                      </button>
                      <div id="menu_open_close">
                      <div class="collapse navbar-collapse" id="navbarsExample04">
@@ -74,6 +85,9 @@
                      </div>
                   </nav>
                </div>
+
+
+
             </div>
          </div>
       </div>
@@ -226,15 +240,35 @@
       </footer>
       <!-- end footer -->
       <!-- Javascript files-->
-      <script src="static/js/jquery.min.js"></script>
+              <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+      <!--<script src="static/js/jquery.min.js"></script>-->
       <script src="static/js/bootstrap.bundle.min.js"></script>
-      <script src="static/js/jquery-3.0.0.min.js"></script>
+      <!--<script src="static/js/jquery-3.0.0.min.js"></script>-->
       <script src="static/js/popper.min.js"></script>
       <script src="static/js/plugin.js"></script>
       <!-- sidebar -->
-      <script src="static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <!--<script src="static/js/jquery.mCustomScrollbar.concat.min.js"></script>-->
       <script src="static/js/custom.js"></script>
       <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>-->
+
+
+
+
+
+        <!--Toggle menu button-->
+
+    //   <script>
+    //   $(document).ready(function(){
+    //       $("#menu-button").click(function(){
+    //           $(".navigation navbar navbar-expand-md navbar-dark ").toggle();
+    //       });
+    //   });
+
+
+    //   </script>
 
 </body>
 
