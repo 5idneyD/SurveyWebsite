@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response, session
+from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import os
 import hashlib
@@ -187,6 +187,10 @@ def login():
 @app.route("/user/<encrypted_username>", methods=['POST', 'GET'])
 def user_page(encrypted_username):
 
+
+    print("----------------------")
+
+
     user = db.session.execute(
         "SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
     for i in user:
@@ -207,12 +211,29 @@ def user_page(encrypted_username):
 
     if request.method == "POST":
 
-        session['logged in'] = False
-        res = make_response(redirect("/"))
-        res.set_cookie("username", "", max_age=0)
-        res.set_cookie("password", "", max_age=0)
+        print("............doing somethiung----")
 
-        return res
+        if "logout_button" in request.form:
+            session['logged in'] = False
+            res = make_response(redirect("/"))
+            res.set_cookie("username", "", max_age=0)
+            res.set_cookie("password", "", max_age=0)
+            print("Logged Out")
+            return res
+
+        elif "delete_survey_button" in request.form:
+            print(request.form["delete_survey_button"])
+
+            survey_number = request.form["delete_survey_button"].split("/")[-1]
+            print(survey_number)
+
+
+
+
+            deletion = db.session.execute("DELETE FROM Surveys WHERE id=" + survey_number + ";")
+            db.session.commit()
+
+            return redirect(f"/user/{encrypted_username}")
 
 
     try:

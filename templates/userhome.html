@@ -73,8 +73,8 @@
 							<div class="center-desk">
 								<div class="text-bg">
 									<a href="https://www.surveyheaven.co.uk">
-									    <form method="post">
-										<button type="submit" id="submitbutton" value="Log-Out" style="background-color: transparent; color:white;">Log Out</button>
+									    <form method="post" name="logout_form">
+										<button type="submit" id="submitbutton" value="Log-Out" name="logout_button" style="background-color: transparent; color:white;">Log Out</button>
 										</form>
 									</a>
 								</div>
@@ -97,6 +97,7 @@
 												style="background-color: transparent">
 												<h2 style="color: white;">New Survey</h2>
 											</button></a>
+
 									</div>
 									{% endblock %}
 
@@ -146,8 +147,13 @@
 										<h2>{{survey[1]}}</h2>
 									</ol>
 								</a>
+
+
 								<div class='linktext' style="padding-bottom: 2%;">
 									<p>www.surveyheaven.co.uk<br>{{survey[0]}}</p>
+								<form method="post" name="delete_survey_form">
+								<button id="delete_survey" name="delete_survey_button" value={{survey[0]}}><img src="/static/images/my_bin (2).png" alt="Delete Survey" width="50" height="170"></button>
+								</form>
 								</div>
 								{%endfor%}
 							</ul>
