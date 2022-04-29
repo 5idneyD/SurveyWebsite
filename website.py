@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response, session, flash
+from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response, session
 from flask_sqlalchemy import SQLAlchemy
 import os
 import hashlib
@@ -226,8 +226,6 @@ def user_page(encrypted_username):
 
             survey_number = request.form["delete_survey_button"].split("/")[-1]
             print(survey_number)
-
-
 
 
             deletion = db.session.execute("DELETE FROM Surveys WHERE id=" + survey_number + ";")
