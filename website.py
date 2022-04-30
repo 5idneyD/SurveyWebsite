@@ -4,20 +4,28 @@ import os
 import hashlib
 
 
+# Current files path to create absolute path
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+# Initiate app, define paths for where to find static&template files
 app = Flask(__name__,
             static_folder='./static',
             template_folder='./templates')
 
+# Using sqlite3 db
+# Secret key changes for each new session; improves security
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + \
     os.path.join(basedir, "users.sqlite3")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.urandom(12).hex()
 
+# Initiate db at start of session
 db = SQLAlchemy(app)
 
 
+# Holds all usernames and passwords
+# Password are hashed before saved
+# encrypted_username is binary; used in urls
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     username = db.Column(db.String(100))
@@ -25,6 +33,9 @@ class Users(db.Model):
     encrypted_username = db.Column(db.String(255))
 
 
+# Holds all users' surveys
+# Sorted by user, then survey
+# Survey Type was initially public/private; now obsolute
 class Surveys(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     username = db.Column(db.String(100))
@@ -48,10 +59,12 @@ class Answers(db.Model):
     score = db.Column(db.Integer)
 
 
+# Create all tables if not yet built
 db.create_all()
 
 
 
+# Home page
 @app.route("/index.html")
 @app.route("/")
 def index(methods=['POST', 'GET']):
@@ -60,36 +73,47 @@ def index(methods=['POST', 'GET']):
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
+
     if request.method == "POST":
 
+        # Takes in users entered username and passwords
         new_password = request.form['password']
         second_password = request.form['password2']
         new_username = request.form['username']
+        # Converts username to binary
         encrypted_name = ''.join(format(ord(x), "b") for x in new_username)
 
+        # Checks if the username is already taken
         used_usernames = db.session.execute("SELECT username FROM users;")
         usernames_taken = []
         for name in used_usernames:
             usernames_taken.append(name[0])
 
-
+        # If username is taken, refresh page with 'username taken' message
         if new_username in usernames_taken:
 
             message = "This username is already taken, please try another"
             return render_template("signup.html", message=message)
 
+        # If the password do not match, refresh page with 'passowrds don't match' message
         elif new_password != second_password:
             message = "These passwords do not match, please try again"
             return render_template("signup.html", message=message)
 
+
         else:
+
+            # Hash username for security reasons
+            # Then insert data into db
             encrypted_password = hashlib.sha256(new_password.encode("UTF-8")).hexdigest()
             new_user = Users(username=new_username, password=encrypted_password,
                              encrypted_username=encrypted_name)
             db.session.add(new_user)
             db.session.commit()
 
+            # Change status to logged in
             session['logged in'] = True
+            # Go to user's homepage
             return redirect(f"/user/{encrypted_name}")
 
     message = ""
@@ -100,19 +124,26 @@ def signup():
 @app.route("/login", methods=['POST', 'GET'])
 def login():
 
+    # Check if cookies of this user are saved
+    # If there aren't any cookies with username and password..
     if not request.cookies.get("username"):
 
 
         current_username = False
         current_password = False
+
         if request.method == "POST":
+
+            # Read entered username and password
             current_username = False
             current_password = False
             current_username = request.form['username']
             current_password = request.form['password']
+            # Hash password so that it can match db passwords (which are hashed)
             current_password = hashlib.sha256(current_password.encode("UTF-8")).hexdigest()
             print(current_username)
 
+            # Load all users from db
             users = db.session.execute("SELECT * FROM users;")
             current_id = False
 
@@ -134,13 +165,14 @@ def login():
                         session['logged in'] = True
                         message = ""
                         res = make_response(redirect(f"/user/{encrypted_username}"))
+                        # Save username and password in cookies for 1 day
                         res.set_cookie("username", current_username, max_age=60*60*24)
                         res.set_cookie("password", current_password, max_age=60*60*24)
 
                         return res
 
             if current_id == False:
-                # message="Username not found, please try again"
+                # Refresh page with error message is user is not found in db
                 message=f"{current_username} not found, please try again"
                 return render_template("login.html",
                                                message=message)
@@ -150,6 +182,7 @@ def login():
             return render_template("login.html", message=message)
 
     else:
+        # Collect username and password from cookies on user's computer
         current_username = request.cookies.get("username")
         current_password = request.cookies.get("password")
 
@@ -188,9 +221,7 @@ def login():
 def user_page(encrypted_username):
 
 
-    print("----------------------")
-
-
+    # Load users data to present on homescreen
     user = db.session.execute(
         "SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
     for i in user:
@@ -211,23 +242,19 @@ def user_page(encrypted_username):
 
     if request.method == "POST":
 
-        print("............doing somethiung----")
-
         if "logout_button" in request.form:
             session['logged in'] = False
             res = make_response(redirect("/"))
+            # Delete cookies if logging out
             res.set_cookie("username", "", max_age=0)
             res.set_cookie("password", "", max_age=0)
             print("Logged Out")
             return res
 
         elif "delete_survey_button" in request.form:
-            print(request.form["delete_survey_button"])
 
+            # delete the survey selected
             survey_number = request.form["delete_survey_button"].split("/")[-1]
-            print(survey_number)
-
-
             deletion = db.session.execute("DELETE FROM Surveys WHERE id=" + survey_number + ";")
             db.session.commit()
 

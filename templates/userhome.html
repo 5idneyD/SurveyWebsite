@@ -33,9 +33,9 @@
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
 		rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="static/css/login_animate.css">
+	<!--<link rel="stylesheet" href="../static/css/login_animate.css">-->
 	<!-- Custom Stylesheet -->
-	<link rel="stylesheet" href="static/css/login_style.css">
+	<!--<link rel="stylesheet" href="../static/css/login_style.css">-->
 </head>
 <!-- body -->
 
@@ -139,9 +139,10 @@
 						<div>
 							<h4 id='sub_header' style="padding-bottom: 5%;">Click On Survey Title<br>To View Results
 							</h4>
-							<div class="login-box animated fadeInUp"></div>
+							<div>
 							<ul id='survey_list'>
 								{% for survey in surveys %}
+								<div>
 								<a href='/user/{{encrypted_username}}/survey_results/{{survey[1]}}'>
 									<ol id='{{survey[1]}}' class='survey_name' style="padding-bottom: 2%;">
 										<h2>{{survey[1]}}</h2>
@@ -154,6 +155,7 @@
 								<form method="post" name="delete_survey_form">
 								<button id="delete_survey" name="delete_survey_button" value={{survey[0]}}><img src="/static/images/my_bin (2).png" alt="Delete Survey" width="50" height="170"></button>
 								</form>
+								</div>
 								</div>
 								{%endfor%}
 							</ul>
