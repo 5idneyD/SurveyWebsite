@@ -235,6 +235,7 @@ def user_page(encrypted_username):
         "SELECT id, survey_name FROM surveys WHERE username='" + username + "';"
     )
 
+    # Read all of this users surveys from db to display on homescreen
     surveys = []
     for survey_id, survey in users_surveys:
         survey_link = url_for("answer_survey", survey_id=survey_id)
@@ -251,6 +252,8 @@ def user_page(encrypted_username):
             print("Logged Out")
             return res
 
+        # There is an image of a bin on screen for each survey
+        # Clicking on deletes the individual survey
         elif "delete_survey_button" in request.form:
 
             # delete the survey selected
@@ -262,10 +265,13 @@ def user_page(encrypted_username):
 
 
     try:
+        # If they are logged in correctly, load userpage
         if session['logged in'] == True:
             return render_template("userhome.html", user=user, username=username,
                                    items=items, create_survey_link=create_survey_link, surveys=surveys,
                                    encrypted_username=encrypted_name)
+
+        # Else, return to login page
         else:
             return redirect("/login")
     except Exception:
@@ -287,9 +293,8 @@ def create_survey(encrypted_username):
             if key == "surveyname":
                 pass
             else:
-
                 questions.append(value)
-        print(questions)
+
 
         user = db.session.execute(
             "SELECT * FROM users WHERE encrypted_username='" + encrypted_username + "';")
@@ -301,6 +306,8 @@ def create_survey(encrypted_username):
                              survey_name=current_survey_name)
         db.session.add(new_survey)
 
+        # Format questions to be loadable to sqlite3 db
+        # Cannot have spaces, question marks, single quotes or double quotes
         for question in questions:
             question = question.replace("?", "").replace("'", "").replace('"', '').replace(" ", "_")
             new_question = Questions(
@@ -337,7 +344,7 @@ def add_answer(encrypted_username, current_survey_name):
         "SELECT question FROM questions WHERE survey_name='" + current_survey_name +
         "' AND username='" + current_username + "';")
 
-    print(questions)
+
 
     if request.method == "POST":
 
@@ -482,13 +489,11 @@ def survey_completed():
         items = dict(i)
         surveys.append([items['survey_name'], items['id']])
 
-    print(surveys)
 
     if request.method=='POST':
 
         survey_id = request.form.get("submit_button")
-        print("-------")
-        print(survey_id)
+
         return redirect(url_for("survey_completed"))
 
     return render_template("survey_completed.html", surveys=surveys)
