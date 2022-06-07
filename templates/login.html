@@ -49,52 +49,16 @@
       <!-- end loader -->
       <!-- header -->
 
-
-      <!--Better UX without blue header at top-->
-      <!--<header>-->
-         <!-- header inner -->
-      <!--   <div class="header">-->
-      <!--      <div class="container">-->
-      <!--         <div class="row">-->
-      <!--            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">-->
-      <!--               <div class="full">-->
-      <!--                  <div class="center-desk">-->
-      <!--                     <div class="text-bg" style="margin-top: 10%;">-->
-      <!--                        <a href="https://www.surveyheaven.co.uk"><h2 style="color: white;">Home</h2></a>-->
-      <!--                     </div>-->
-      <!--                  </div>-->
-      <!--               </div>-->
-      <!--            </div>-->
-      <!--         </div>-->
-      <!--      </div>-->
-      <!--   </div>-->
-      <!--</header>-->
-      <!-- end header inner -->
-      <!-- end header -->
-
-
-
-      <!-- banner -->
-      <!--<section class="banner_main" style="height: 1px;">-->
-      <!--   <div class="container-fluid">-->
-      <!--      <div class="row d_flex">-->
-      <!--         <div class="col-xl-10 col-lg-10 col-md-10 ">-->
-      <!--</section>-->
-      <!-- end banner -->
-
-
-
-
         <!-- about -->
       <div class="about" style="background-color: white; margin-top: -5%;">
          <div class="container" >
             <div class="row">
-               <div class="col-md-11 offset-md-1">
-                  <div class="titlepage">
+               <div class="col">
+                  <div class="titlepage" style="margin-left: 35%;">
 					<div id='createaccount'>
 					<form id="newaccount" method="post">
 
-						<div style="margin-left: 10%; margin-top: -5%; background-color: white;" class="container">
+						<div style="margin-top: -5%; background-color: white;">
 							<div class="login-box animated fadeInUp">
 								<label for="username">Username</label>
 								<br/>
@@ -113,14 +77,17 @@
 
 
 					</div>
-						<div style='width: 40%; font-size: 20px; margin-top: 20%; margin-left: 40%;'>
+					<div class="row">
+						<div class="col" style='width: 40%; font-size: 10px; margin-top: 20%;'>
 							{%for i in data%}
 							<p>{{i[0]}}</p>
 							{%endfor%}
 							<div id='message'>
-							<h2>{{message}}</h2></div>
+							    <h2>{{message}}</h2>
+							</div>
 						</div>
-					        </div>
+					</div>
+				 </div>
                </div>
             </div>
                      <div class="row">

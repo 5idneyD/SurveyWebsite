@@ -428,10 +428,10 @@ width: 100%;
      text-align: center;
      padding-bottom: 60px;
 }
-.titlepage span {color: #d8bd08; font-weight: 500; font-size: 20px;}
+.titlepage span {color: #d8bd08; font-weight: 500; font-size: 10px;}
 
 .titlepage h2 {
-     font-size: 55px;
+     font-size: 25px;
      color: #12153c;
      line-height: 55px;
      font-weight: bold;
@@ -464,7 +464,7 @@ width: 100%;
 }
 
 .about .titlepage p {
-     font-size: 17px;
+     font-size: 10px;
      line-height: 28px;
      color: #232324;
 }

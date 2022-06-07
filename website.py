@@ -371,6 +371,7 @@ def add_answer(encrypted_username, current_survey_name):
     except:
         return redirect("/login")
 
+
 @app.route("/user/<encrypted_username>/survey_results/<survey_name>/", methods=["POST", "GET"])
 def survey_results(encrypted_username, survey_name):
 
